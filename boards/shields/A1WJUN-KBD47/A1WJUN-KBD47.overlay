@@ -138,7 +138,6 @@
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <31>;
-        charge-pump;
         prechargep = <0x22>;
     };
 };
