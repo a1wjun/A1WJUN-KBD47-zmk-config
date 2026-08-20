@@ -128,20 +128,17 @@
     status = "okay";
     clock-frequency = <I2C_BITRATE_FAST>;
 
-    oled: ssd1306@3d {
+    oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         status = "okay";
-        reg = <0x3d>;
+        reg = <0x3c>;
         width = <128>;
         height = <32>;
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <31>;
-        segment-remap;
-        com-invdir;
-        com-sequential;
-        inversion-on;
+        charge-pump;
         prechargep = <0x22>;
     };
 };
