@@ -140,6 +140,6 @@
         multiplex-ratio = <31>;
         segment-remap;
         com-invdir;
-        prechargep = <0x22>;
+        prechargep = <0xF1>;
     };
 };
