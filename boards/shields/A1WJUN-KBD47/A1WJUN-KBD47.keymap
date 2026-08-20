@@ -182,7 +182,7 @@
         compatible = "zmk,combos";
 
         combo_esc {
-            timeout-ms = <50>; key-positions = <1 2>; bindings = <&kp ESC>; layers = <0>;
+            timeout-ms = <50>; key-positions = <2 3>; bindings = <&kp ESC>; layers = <0>;
         };
         combo_select_all {
             timeout-ms = <50>; key-positions = <12 13>; bindings = <&kp LC(A)>; layers = <0>;
