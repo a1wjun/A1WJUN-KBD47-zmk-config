@@ -120,7 +120,7 @@
         zmk,kscan            = <&kscan0>;
         zmk,physical-layout  = <&physical_layout0>;
         zmk,sensors          = <&sensors>;
-        zephyr,display       = <&oled>;
+        zephyr,display       = &oled;
     };
 };
 
