@@ -12,4 +12,13 @@ config DISPLAY
 config SSD1306
     default y
 
+config ZMK_DISPLAY
+    default y
+
+config EC11
+    default y
+
+config EC11_TRIGGER
+    default y
+
 endif

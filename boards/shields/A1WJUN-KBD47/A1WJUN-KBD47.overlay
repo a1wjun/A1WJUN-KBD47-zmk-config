@@ -105,15 +105,15 @@
     encoder0: encoder_0 {
         compatible = "alps,ec11";
         status = "okay";
-        a-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
-        b-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+        a-gpios = <&gpio1 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&gpio1 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps   = <20>;
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder0>;
-        triggers-per-rotation = <4>;
+        triggers-per-rotation = <20>;
     };
 
     chosen {
