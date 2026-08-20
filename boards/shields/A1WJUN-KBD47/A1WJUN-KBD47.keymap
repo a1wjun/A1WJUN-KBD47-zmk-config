@@ -152,7 +152,7 @@
                 &none          &none          &none            &none          &none          &none          &none          &mkp MCLK      &none          &none          &none          &none
                 &none          &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none
             >;
-            sensor-bindings = <&inc_dec_sc C_SCROLL_UP C_SCROLL_DN>;
+            sensor-bindings = <&inc_dec_sc 1 -1>;
         };
 
         layer_system {
