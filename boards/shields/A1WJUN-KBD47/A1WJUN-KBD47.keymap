@@ -42,11 +42,6 @@
             bindings = <&mo>, <&kp>;
             display-name = "Layer-Tap";
         };
-
-        studio_unlock: studio_unlock {
-            compatible = "zmk,behavior-studio-unlock";
-            #binding-cells = <0>;
-        };
     };
 };
 
@@ -55,7 +50,6 @@
     y-input-code = <INPUT_REL_Y>;
     time-to-max-speed-ms = <300>;
     acceleration-exponent = <1>;
-    delay-ms = <0>;
 };
 
 &msc {
@@ -63,7 +57,6 @@
     y-input-code = <INPUT_REL_WHEEL>;
     time-to-max-speed-ms = <300>;
     acceleration-exponent = <0>;
-    delay-ms = <0>;
 };
 
 &soft_off {
@@ -75,6 +68,7 @@
         compatible = "zmk,keymap";
 
         layer_base {
+            display-name = "Base";
             bindings = <
                 &kp ESC      &kp Q          &kp W          &kp E          &kp R          &kp T          &kp Y          &kp U          &kp I          &kp O          &kp P          &kp BACKSPACE
                 &kp TAB      &kp A          &kp S          &kp D          &kp F          &kp G          &kp H          &kp J          &kp K          &kp L          &kp SLASH      &kp ENTER
@@ -85,6 +79,7 @@
         };
 
         layer_number {
+            display-name = "Number";
             bindings = <
                 &none          &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &msc SCRL_UP
                 &kp CAPS       &none          &none          &none          &none          &none          &kp LBKT       &kp RBKT       &kp MINUS      &kp EQUAL      &kp BSLH       &msc SCRL_DOWN
@@ -95,6 +90,7 @@
         };
 
         layer_function {
+            display-name = "Function";
             bindings = <
                 &kp F11        &kp F1         &kp F2         &kp F3         &kp F4         &kp F5         &kp F6         &kp F7         &kp F8         &kp F9         &kp F10        &kp F12
                 &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
@@ -105,6 +101,7 @@
         };
 
         layer_button {
+            display-name = "Button";
             bindings = <
                 &soft_off      &none          &none          &none          &none          &none          &none          &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none          &none
                 &none          &none          &none          &none          &none          &none          &bt BT_CLR     &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none
@@ -115,6 +112,7 @@
         };
 
         layer_symbols {
+            display-name = "Symbols";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -125,6 +123,7 @@
         };
 
         layer_media {
+            display-name = "Media";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -135,6 +134,7 @@
         };
 
         layer_navigation {
+            display-name = "Navigation";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -145,6 +145,7 @@
         };
 
         layer_mouse {
+            display-name = "Mouse";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -155,6 +156,7 @@
         };
 
         layer_system {
+            display-name = "System";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -165,6 +167,7 @@
         };
 
         layer_bluetooth {
+            display-name = "Bluetooth";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none

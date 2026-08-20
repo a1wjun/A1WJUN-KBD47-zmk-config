@@ -1,3 +1,13 @@
 ---
-shields:
-  - name: A1WJUN-KBD47
+file_format: "1"
+id: a1wjun_kbd47
+name: A1WJUN-KBD47
+type: shield
+requires: [pro_micro]
+features:
+  - keys
+  - display
+  - encoder
+  - studio
+  - pointer
+exposes: [i2c_oled]
