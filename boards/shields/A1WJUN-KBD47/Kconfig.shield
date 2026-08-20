@@ -1,0 +1,2 @@
+config SHIELD_A1WJUN_KBD47
+    def_bool $(shields_list_contains,A1WJUN-KBD47)
