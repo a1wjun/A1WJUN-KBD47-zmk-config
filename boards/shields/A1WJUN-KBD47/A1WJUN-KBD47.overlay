@@ -77,8 +77,8 @@
         wakeup-source;
         diode-direction = "col2row";
 
-        debounce-press-ms       = <5>;
-        debounce-release-ms     = <5>;
+        debounce-press-ms       = <3>;
+        debounce-release-ms     = <3>;
         debounce-scan-period-ms = <1>;
 
         col-gpios =
