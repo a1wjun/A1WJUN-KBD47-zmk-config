@@ -42,6 +42,13 @@
             bindings = <&mo>, <&kp>;
             display-name = "Layer-Tap";
         };
+
+        scroll_ud: behavior_scroll_ud {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            tap-ms = <20>;
+        };
     };
 };
 
@@ -152,7 +159,7 @@
                 &none          &none          &none            &none          &none          &none          &none          &mkp MCLK      &none          &none          &none          &none
                 &none          &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none
             >;
-            sensor-bindings = <&inc_dec_sc 1 -1>;
+            sensor-bindings = <&scroll_ud>;
         };
 
         layer_system {
