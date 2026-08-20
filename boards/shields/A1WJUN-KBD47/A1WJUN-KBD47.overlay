@@ -133,11 +133,12 @@
         status = "okay";
         reg = <0x3d>;
         width = <128>;
-        height = <64>;
+        height = <32>;
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>;
+        multiplex-ratio = <31>;
         prechargep = <0x22>;
+        rotation = <180>;
     };
 };
