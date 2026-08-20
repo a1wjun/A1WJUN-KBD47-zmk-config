@@ -139,6 +139,7 @@
         display-offset = <0>;
         multiplex-ratio = <31>;
         prechargep = <0x22>;
-        rotation = <180>;
+        seg-remap;
+        com-remap;
     };
 };
