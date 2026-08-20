@@ -120,26 +120,6 @@
         zmk,kscan            = <&kscan0>;
         zmk,physical-layout  = <&physical_layout0>;
         zmk,sensors          = <&sensors>;
-        zephyr,display       = &oled;
     };
 };
 
-&pro_micro_i2c {
-    status = "okay";
-    clock-frequency = <I2C_BITRATE_STANDARD>;
-
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        status = "okay";
-        reg = <0x3c>;
-        width = <128>;
-        height = <32>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        segment-remap;
-        com-invdir;
-        prechargep = <0xF1>;
-    };
-};

@@ -3,18 +3,6 @@ if SHIELD_A1WJUN_KBD47
 config ZMK_KEYBOARD_NAME
     default "A1WJUN-KBD47"
 
-config I2C
-    default y
-
-config DISPLAY
-    default y
-
-config SSD1306
-    default y
-
-config ZMK_DISPLAY
-    default y
-
 config EC11
     default y
 
