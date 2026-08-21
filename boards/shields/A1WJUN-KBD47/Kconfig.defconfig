@@ -6,4 +6,10 @@ config ZMK_KEYBOARD_NAME
 config EC11
     default y
 
+# 启用 nRF52840 高压 DCDC（nice_nano/nice_nano_v2 均适用）。
+# 注意：SOC_DCDC_NRF52X_HV 是无 prompt 的 SoC 内部 Kconfig 符号，
+# 必须通过 Kconfig.defconfig 的 default 机制启用，不能在用户 .conf 中直接赋值。
+config SOC_DCDC_NRF52X_HV
+    default y
+
 endif
