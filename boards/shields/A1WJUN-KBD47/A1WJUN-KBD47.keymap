@@ -493,7 +493,7 @@
         };
 
         layer_reserved_18 {
-            display-name = "Reserved 18";
+            display-name = "Fortnite";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -504,7 +504,7 @@
         };
 
         layer_reserved_19 {
-            display-name = "Reserved 19";
+            display-name = "Trace";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
