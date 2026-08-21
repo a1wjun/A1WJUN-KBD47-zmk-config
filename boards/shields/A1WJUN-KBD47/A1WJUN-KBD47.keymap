@@ -96,6 +96,19 @@
         };
 
         /*
+         * encoder_click_esc (编码器点击 - ESC功能)
+         * 单击 = ESC，双击 = ` (与 col0 row0 相同)
+         */
+        encoder_click_esc: encoder_click_esc {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Encoder Click ESC";
+        };
+
+        /*
          * encoder_brightness (编码器亮度调节)
          */
         encoder_brightness: behavior_brightness {
@@ -350,8 +363,8 @@
                 &none           &none          &mmv MOVE_UP     &none          &none          &none          &none          &msc SCRL_UP   &none          &none          &none          &none
                 // 第 2 行：鼠标左/下/右 + 滚轮下滚
                 &none           &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &none         &none          &none          &msc SCRL_DOWN &none          &none          &none          &none
-                // 第 3 行：中键 + 后退/前进
-                &none           &none          &none            &none          &none          &none          &none          &mkp MCLK      &mkp MB4       &mkp MB5       &none          &none
+                // 第 3 行：中键 + 后退/前进 + 编码器点击（ESC）
+                &none           &none          &none            &none          &none          &none          &none          &mkp MCLK      &mkp MB4       &mkp MB5       &encoder_click_esc ESC GRAVE &none
                 // 第 4 行：左键 + 右键
                 &none           &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none          &none
             >;
