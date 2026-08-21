@@ -14,7 +14,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 /*
- * 层索引定义（共10层）
+ * 层索引定义（共32层，Layer10-Layer31 为预留扩展层）
  */
 #define Base        0
 #define Number      1
@@ -87,42 +87,50 @@
 
         /*
          * scroll_ud (编码器滚动行为)
+         * 旋转：滚轮上下，点击：中键
          */
         scroll_ud: behavior_scroll_ud {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
             tap-ms = <20>;
+            tap-bindings = <&mkp MCLK>;  // 点击编码器触发中键
         };
 
         /*
          * encoder_brightness (编码器亮度调节)
+         * 旋转：亮度调节，点击：无操作
          */
         encoder_brightness: behavior_brightness {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_BRI_DN>, <&kp C_BRI_UP>;
             tap-ms = <20>;
+            tap-bindings = <&none>;  // 点击无操作
         };
 
         /*
          * encoder_media (编码器媒体控制)
+         * 旋转：上/下一曲，点击：播放/暂停
          */
         encoder_media: behavior_media {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_PREV>, <&kp C_NEXT>;
             tap-ms = <20>;
+            tap-bindings = <&kp C_PP>;  // 点击触发播放/暂停
         };
 
         /*
          * encoder_bt_switch (编码器蓝牙切换)
+         * 旋转：切换设备，点击：断开当前连接
          */
         encoder_bt_switch: behavior_bt_switch {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&bt BT_PRV>, <&bt BT_NXT>;
             tap-ms = <20>;
+            tap-bindings = <&bt BT_DISC 0>;  // 点击断开当前设备
         };
     };
 
@@ -132,11 +140,11 @@
      * ========================================
      */
     macros {
-        // 一键输入 "Hello"
-        hello_macro: hello_macro {
+        // 一键输入邮箱地址（实用宏示例）
+        email_macro: email_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp H>, <&kp E>, <&kp L>, <&kp L>, <&kp O>;
+            bindings = <&kp U>, <&kp S>, <&kp E>, <&kp R>, <&kp AT>, <&kp G>, <&kp M>, <&kp A>, <&kp I>, <&kp L>, <&kp DOT>, <&kp C>, <&kp O>, <&kp M>;
             wait-ms = <10>;
             tap-ms = <10>;
         };
@@ -393,8 +401,8 @@
                 &none           &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 2 行：蓝牙清除 + 断开
                 &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR     &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none
-                // 第 3 行：清除所有配对 + hello 宏
-                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &none          &none          &none          &hello_macro
+                // 第 3 行：清除所有配对 + 邮箱宏
+                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &none          &none          &none          &email_macro
                 // 第 4 行：输出切换
                 &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none
             >;
@@ -660,50 +668,50 @@
         // ===== 基础编辑组合键 =====
 
         combo_esc {
-            timeout-ms = <50>;
-            key-positions = <2 3>;           // Q + W = ESC
+            timeout-ms = <30>;  // 快速组合：Q + W = ESC
+            key-positions = <2 3>;
             bindings = <&kp ESC>;
             layers = <0>;
         };
 
         combo_select_all {
-            timeout-ms = <50>;
-            key-positions = <12 13>;         // A + S = Ctrl+A
+            timeout-ms = <50>;  // 普通组合：A + S = Ctrl+A
+            key-positions = <12 13>;
             bindings = <&kp LC(A)>;
             layers = <0>;
         };
 
         combo_undo {
-            timeout-ms = <50>;
-            key-positions = <24 25>;         // Z + X = Ctrl+Z
+            timeout-ms = <50>;  // 普通组合：Z + X = Ctrl+Z
+            key-positions = <24 25>;
             bindings = <&kp LC(Z)>;
             layers = <0>;
         };
 
         combo_cut {
-            timeout-ms = <50>;
-            key-positions = <25 26>;         // X + C = Ctrl+X
+            timeout-ms = <50>;  // 普通组合：X + C = Ctrl+X
+            key-positions = <25 26>;
             bindings = <&kp LC(X)>;
             layers = <0>;
         };
 
         combo_copy {
-            timeout-ms = <50>;
-            key-positions = <26 27>;         // C + V = Ctrl+C
+            timeout-ms = <50>;  // 普通组合：C + V = Ctrl+C
+            key-positions = <26 27>;
             bindings = <&kp LC(C)>;
             layers = <0>;
         };
 
         combo_paste {
-            timeout-ms = <50>;
-            key-positions = <27 28>;         // V + B = Ctrl+V
+            timeout-ms = <50>;  // 普通组合：V + B = Ctrl+V
+            key-positions = <27 28>;
             bindings = <&kp LC(V)>;
             layers = <0>;
         };
 
         combo_redo {
-            timeout-ms = <50>;
-            key-positions = <28 29>;         // B + N = Ctrl+Y
+            timeout-ms = <50>;  // 普通组合：B + N = Ctrl+Y
+            key-positions = <28 29>;
             bindings = <&kp LC(Y)>;
             layers = <0>;
         };
@@ -711,8 +719,8 @@
         // ===== 系统组合键 =====
 
         combo_screenshot {
-            timeout-ms = <50>;
-            key-positions = <38 39>;         // , + . = PrtSc (截图)
+            timeout-ms = <80>;  // 慢速组合：, + . = PrtSc（避免误触）
+            key-positions = <38 39>;
             bindings = <&kp PSCRN>;
             layers = <0>;
         };
