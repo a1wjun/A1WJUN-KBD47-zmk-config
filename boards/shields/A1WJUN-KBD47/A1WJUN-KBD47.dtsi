@@ -49,6 +49,8 @@
             , <&key_physical_attrs 100 100  400  300       0     0     0>
             , <&key_physical_attrs 100 100  500  300       0     0     0>
             , <&key_physical_attrs 100 100  600  300       0     0     0>
+            // 第 4 行跳过 x=700（PCB 上该位置无物理键），对应 matrix_transform 跳过 RC(3,7)
+            // 物理布局与矩阵变换保持一致，避免逻辑键索引错位
             , <&key_physical_attrs 100 100  800  300       0     0     0>
             , <&key_physical_attrs 100 100  900  300       0     0     0>
             , <&key_physical_attrs 100 100 1000  300       0     0     0>

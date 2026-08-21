@@ -16,16 +16,17 @@
     };
 
     // ========== GPIO 扫描驱动 ==========
+    // wakeup-source：睡眠/软关机后，按键触发 GPIO 中断即可唤醒 MCU（机械轴唤醒）
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
         status = "okay";
-        wakeup-source;
+        wakeup-source;                              // 整个 kscan 作为唤醒源，覆盖所有 row/col GPIO
         diode-direction = "col2row";
 
-        // 去抖 2ms，与 .conf 中 ZMK_KSCAN_DEBOUNCE_*_MS=2 保持一致
-        // 机械轴适用，更快响应
-        debounce-press-ms = <2>;
-        debounce-release-ms = <2>;
+        // 去抖 5ms，与 .conf 中 ZMK_KSCAN_DEBOUNCE_*_MS=5 保持一致
+        // 机械轴适用，量产批次更稳定，避免双击
+        debounce-press-ms = <5>;
+        debounce-release-ms = <5>;
         debounce-scan-period-ms = <1>;
 
         col-gpios
@@ -43,6 +44,7 @@
             , <&gpio0 6 GPIO_ACTIVE_HIGH>      // COL11
             ;
 
+        // ROW GPIO 作为输入，被 kscan0 wakeup-source 覆盖，按键可唤醒睡眠
         row-gpios
             = <&pro_micro  4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW0
             , <&pro_micro  5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1
