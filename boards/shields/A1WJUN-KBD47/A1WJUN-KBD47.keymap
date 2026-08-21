@@ -405,7 +405,7 @@
          * ========================================
          */
         layer_reserved_10 {
-            display-name = "Reserved 10";
+            display-name = "Layer10";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -416,7 +416,7 @@
         };
 
         layer_reserved_11 {
-            display-name = "Reserved 11";
+            display-name = "Layer11";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -427,7 +427,7 @@
         };
 
         layer_reserved_12 {
-            display-name = "Reserved 12";
+            display-name = "Layer12";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -438,7 +438,7 @@
         };
 
         layer_reserved_13 {
-            display-name = "Reserved 13";
+            display-name = "Layer13";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -449,7 +449,7 @@
         };
 
         layer_reserved_14 {
-            display-name = "Reserved 14";
+            display-name = "Layer14";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -460,7 +460,7 @@
         };
 
         layer_reserved_15 {
-            display-name = "Reserved 15";
+            display-name = "Layer15";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -471,7 +471,7 @@
         };
 
         layer_reserved_16 {
-            display-name = "Reserved 16";
+            display-name = "Layer16";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -482,7 +482,7 @@
         };
 
         layer_reserved_17 {
-            display-name = "Reserved 17";
+            display-name = "Layer17";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -493,7 +493,7 @@
         };
 
         layer_reserved_18 {
-            display-name = "Fortnite";
+            display-name = "Layer18";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -504,7 +504,7 @@
         };
 
         layer_reserved_19 {
-            display-name = "Trace";
+            display-name = "Layer19";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -515,7 +515,7 @@
         };
 
         layer_reserved_20 {
-            display-name = "Reserved 20";
+            display-name = "Layer20";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -526,7 +526,7 @@
         };
 
         layer_reserved_21 {
-            display-name = "Reserved 21";
+            display-name = "Layer21";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -537,7 +537,7 @@
         };
 
         layer_reserved_22 {
-            display-name = "Reserved 22";
+            display-name = "Layer22";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -548,7 +548,7 @@
         };
 
         layer_reserved_23 {
-            display-name = "Reserved 23";
+            display-name = "Layer23";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -559,7 +559,7 @@
         };
 
         layer_reserved_24 {
-            display-name = "Reserved 24";
+            display-name = "Layer24";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -570,7 +570,7 @@
         };
 
         layer_reserved_25 {
-            display-name = "Reserved 25";
+            display-name = "Layer25";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -581,7 +581,7 @@
         };
 
         layer_reserved_26 {
-            display-name = "Reserved 26";
+            display-name = "Layer26";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -592,7 +592,7 @@
         };
 
         layer_reserved_27 {
-            display-name = "Reserved 27";
+            display-name = "Layer27";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -603,7 +603,7 @@
         };
 
         layer_reserved_28 {
-            display-name = "Reserved 28";
+            display-name = "Layer28";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -614,7 +614,7 @@
         };
 
         layer_reserved_29 {
-            display-name = "Reserved 29";
+            display-name = "Layer29";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -625,7 +625,7 @@
         };
 
         layer_reserved_30 {
-            display-name = "Reserved 30";
+            display-name = "Layer30";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -636,7 +636,7 @@
         };
 
         layer_reserved_31 {
-            display-name = "Reserved 31";
+            display-name = "Layer31";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
