@@ -61,7 +61,7 @@
 
         /*
          * tap_dance_esc (ESC Tap Dance)
-         * 单击 = ESC，双击 = MUTE (反引号)
+         * 单击 = ESC，双击 = MUTE
          */
         td_esc: tap_dance_esc {
             compatible = "zmk,behavior-hold-tap";
@@ -74,7 +74,7 @@
 
          /*
          * tap_dance_q (Q Tap Dance)
-         * 单击 = Q，双击 = 1 (反引号)
+         * 单击 = Q，双击 = 1
          */
         td_q: tap_dance_q {
             compatible = "zmk,behavior-hold-tap";
@@ -87,7 +87,7 @@
 
          /*
          * tap_dance_w (W Tap Dance)
-         * 单击 = W，双击 = 2 (反引号)
+         * 单击 = W，双击 = 2
          */
         td_w: tap_dance_w {
             compatible = "zmk,behavior-hold-tap";
@@ -100,7 +100,7 @@
 
          /*
          * tap_dance_e (E Tap Dance)
-         * 单击 = E，双击 = 3 (反引号)
+         * 单击 = E，双击 = 3
          */
         td_e: tap_dance_e {
             compatible = "zmk,behavior-hold-tap";
@@ -113,7 +113,7 @@
 
          /*
          * tap_dance_r (R Tap Dance)
-         * 单击 = R，双击 = 4 (反引号)
+         * 单击 = R，双击 = 4
          */
         td_r: tap_dance_r {
             compatible = "zmk,behavior-hold-tap";
@@ -125,7 +125,7 @@
         };
          /*
          * tap_dance_t (T Tap Dance)
-         * 单击 = T，双击 = 5 (反引号)
+         * 单击 = T，双击 = 5
          */
         td_t: tap_dance_t {
             compatible = "zmk,behavior-hold-tap";
@@ -138,7 +138,7 @@
 
          /*
          * tap_dance_y (Y Tap Dance)
-         * 单击 = Y，双击 = 6 (反引号)
+         * 单击 = Y，双击 = 6
          */
         td_y: tap_dance_y {
             compatible = "zmk,behavior-hold-tap";
@@ -151,7 +151,7 @@
 
          /*
          * tap_dance_u (U Tap Dance)
-         * 单击 = U，双击 = 7 (反引号)
+         * 单击 = U，双击 = 7
          */
         td_u: tap_dance_u {
             compatible = "zmk,behavior-hold-tap";
@@ -164,7 +164,7 @@
 
          /*
          * tap_dance_i (I Tap Dance)
-         * 单击 = I，双击 = 8 (反引号)
+         * 单击 = I，双击 = 8
          */
         td_i: tap_dance_i {
             compatible = "zmk,behavior-hold-tap";
@@ -176,7 +176,7 @@
         };
          /*
          * tap_dance_o (O Tap Dance)
-         * 单击 = O，双击 = 9 (反引号)
+         * 单击 = O，双击 = 9
          */
         td_o: tap_dance_o {
             compatible = "zmk,behavior-hold-tap";
@@ -189,7 +189,7 @@
 
          /*
          * tap_dance_p (P Tap Dance)
-         * 单击 = P，双击 = 0 (反引号)
+         * 单击 = P，双击 = 0
          */
         td_p: tap_dance_p {
             compatible = "zmk,behavior-hold-tap";
@@ -339,7 +339,7 @@
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
                 &kp LSHFT        &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &lt 6 UP       &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
-                &lt 7 LCTRL      &lt 3 LGUI    &lt 2 LALT    &lt 9 C_MUTE  &lt 5 C_PP    &lt 1 SPACE   &lt 1 SPACE   &lt 4 RALT    &kp LEFT      &kp DOWN      &kp RIGHT
+                &lt 3 LCTRL      &kp LGUI    &kp LALT    &kp C_MUTE  &kp C_PP    &lt 1 SPACE   &lt 2 SPACE   &kp C_MUTE    &kp LEFT      &kp DOWN      &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
