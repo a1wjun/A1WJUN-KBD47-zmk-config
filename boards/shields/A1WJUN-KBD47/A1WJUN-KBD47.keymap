@@ -72,6 +72,32 @@
             display-name = "Tap Dance ESC";
         };
 
+         /*
+         * tap_dance_q (Q Tap Dance)
+         * 单击 = Q，双击 = 1 (反引号)
+         */
+        td_q: tap_dance_q {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap Dance Q";
+        };
+
+         /*
+         * tap_dance_w (W Tap Dance)
+         * 单击 = W，双击 = 2 (反引号)
+         */
+        td_w: tap_dance_w {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap Dance W";
+        };
+
         /*
          * tap_dance_tab (TAB Tap Dance)
          * 单击 = TAB，双击 = CAPSLOCK
