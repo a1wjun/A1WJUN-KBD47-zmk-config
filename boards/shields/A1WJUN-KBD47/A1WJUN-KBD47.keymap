@@ -189,6 +189,7 @@
          * 底层快捷键：
          *   - ESC 单击=ESC，双击=` (Tap Dance)
          *   - TAB 单击=TAB，双击=CAPS (Tap Dance)
+         *   - 左 GUI 按住 → 层 3（Button）
          *   - 左 Ctrl 按住 → 层 7（Mouse）
          *   - 左 Alt 按住 → 层 2（Function）
          *   - 右拇指上键 按住 → 层 5（Media）
@@ -208,7 +209,7 @@
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
                 &kp LSHFT        &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &lt 6 UP       &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
-                &lt 7 LCTRL      &kp LGUI      &lt 2 LALT    &lt 1 SPACE   &lt 1 SPACE   &lt 5 C_PP    &lt 9 C_MUTE  &lt 4 RALT    &kp LEFT      &kp DOWN      &kp RIGHT
+                &lt 7 LCTRL      &lt 3 LGUI    &lt 2 LALT    &lt 1 SPACE   &lt 1 SPACE   &lt 5 C_PP    &lt 9 C_MUTE  &lt 4 RALT    &kp LEFT      &kp DOWN      &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -246,7 +247,7 @@
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 3 行：导航键
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &kp PAGE_UP    &kp PAGE_UP    &none
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &kp HOME       &kp PAGE_UP    &kp END
                 // 第 4 行：导航键
                 &none           &none          &none          &none          &kp HOME       &kp PAGE_DOWN  &kp END        &none          &none          &none          &none
             >;
@@ -347,10 +348,10 @@
                 &none           &none          &mmv MOVE_UP     &none          &none          &none          &none          &msc SCRL_UP   &none          &none          &none          &none
                 // 第 2 行：鼠标左/下/右 + 滚轮下滚
                 &none           &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &none         &none          &none          &msc SCRL_DOWN &none          &none          &none          &none
-                // 第 3 行：中键
-                &none           &none          &none            &none          &none          &none          &none          &mkp MCLK      &none          &none          &none          &none
+                // 第 3 行：中键 + 后退/前进
+                &none           &none          &none            &none          &none          &none          &none          &mkp MCLK      &mkp MB4       &mkp MB5       &none          &none
                 // 第 4 行：左键 + 右键
-                &none           &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none
+                &none           &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none          &none
             >;
             sensor-bindings = <&scroll_ud>;
         };
@@ -367,7 +368,7 @@
             display-name = "System";
             bindings = <
                 // 第 1 行：系统功能键
-                &none           &none          &none          &none           &kp INSERT     &kp DELETE     &none          &none          &none          &none          &none          &none
+                &none           &kp INSERT     &kp DELETE     &kp PAUSE_BREAK &kp PSCRN     &kp SLCK       &kp HOME       &kp END        &kp PAGE_UP    &kp PAGE_DOWN  &none          &none
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 3 行：空
@@ -390,8 +391,8 @@
                 &none           &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 2 行：蓝牙清除 + 断开
                 &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR     &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none
-                // 第 3 行：清除所有配对
-                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &none          &none          &none          &none
+                // 第 3 行：清除所有配对 + hello 宏
+                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &none          &none          &none          &hello_macro
                 // 第 4 行：输出切换
                 &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none
             >;
