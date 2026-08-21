@@ -355,9 +355,9 @@
                 // 第 1 行：数字行 + 滚轮上滚
                 &trans        &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0        &trans
                 // 第 2 行：符号优化布局
-                &kp CAPS      &kp C_BRI_UP   &none          &none          &none          &none          &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp NUBS       &trans
+                &kp CAPS      &kp C_BRI_UP   &none          &none          &none          &none          &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH      &trans
                 // 第 3 行：鼠标移动
-                &kp RSHFT     &kp C_BRI_DN   &none          &none          &none          &none          &kp SEMI       &kp APOS       &mkp MB4       &mkp LCLK       &mmv MOVE_UP   &mkp RCLK
+                &kp RSHFT     &kp C_BRI_DN   &none          &none          &none          &none          &kp SEMI       &kp APOS       &mkp MB4       &mkp LCLK      &mmv MOVE_UP  &mkp RCLK
                 // 第 4 行：鼠标点击
                 &lt 3 RCTRL   &kp RGUI       &kp RALT       &kp PSCRN      &kp KP_NUM     &none          &mkp MCLK      &mkp MB4       &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT
             >;
