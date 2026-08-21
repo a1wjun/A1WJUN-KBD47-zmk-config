@@ -339,7 +339,7 @@
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
                 &kp LSHFT        &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &lt 6 UP       &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
-                &lt 3 LCTRL      &kp LGUI    &kp LALT    &kp C_MUTE  &kp C_PP    &lt 1 SPACE   &lt 2 SPACE   &kp C_MUTE    &kp LEFT      &kp DOWN      &kp RIGHT
+                &lt 3 LCTRL      &kp LGUI    &kp LALT    &kp C_VOL_DN  &kp C_PP    &lt 1 SPACE   &lt 2 SPACE   &kp C_VOL_UP    &kp LEFT      &kp DOWN      &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -353,15 +353,15 @@
             display-name = "Number 1";
             bindings = <
                 // 第 1 行：数字行 + 滚轮上滚
-                &trans          &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &msc SCRL_UP
+                &trans        &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0        &trans
                 // 第 2 行：符号优化布局
-                &kp CAPS        &kp GRAVE      &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp SEMI       &kp APOS       &none          &none          &msc SCRL_DOWN
+                &kp CAPS      &kp C_BRI_UP   &none          &none          &none          &none          &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp NUBS       &trans
                 // 第 3 行：鼠标移动
-                &none           &none          &none          &none          &none          &none          &none          &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP  &mmv MOVE_RIGHT
+                &kp RSHFT     &kp C_BRI_DN   &none          &none          &none          &none          &kp SEMI       &kp APOS       &mkp MB4       &mkp LCLK       &mmv MOVE_UP   &mkp RCLK
                 // 第 4 行：鼠标点击
-                &none           &none          &none          &none          &none          &none          &none          &mkp LCLK      &mkp MCLK      &mkp RCLK      &none
+                &lt 3 RCTRL   &kp RGUI       &kp RALT       &kp PSCRN      &kp KP_NUM     &none          &mkp MCLK      &mkp MB4       &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&encoder_brightness>;
         };
 
         /*
@@ -377,9 +377,9 @@
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 3 行：导航键
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &kp HOME       &kp PAGE_UP    &kp END
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &kp PAGE_UP    &none
                 // 第 4 行：导航键
-                &none           &none          &none          &none          &kp HOME       &kp PAGE_DOWN  &kp END        &none          &none          &none          &none
+                &none           &none          &none          &none          &none          &none          &none          &none          &kp HOME       &kp PAGE_DOWN   &kp END
             >;
             sensor-bindings = <&encoder_media>;
         };
@@ -393,15 +393,15 @@
             display-name = "Button 3";
             bindings = <
                 // 第 1 行：软关机 + 蓝牙断开
-                &soft_off       &none          &none          &none          &none          &none          &none          &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none          &none
+                &soft_off       &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4   &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4  &none
                 // 第 2 行：蓝牙清除 + 选择设备
-                &none           &none          &none          &none          &none          &none          &bt BT_CLR     &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none
+                &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 3 行：清除所有配对、系统复位、进入刷机模式、Studio 解锁
-                &none           &none          &none          &none          &none          &none          &bt BT_CLR_ALL &sys_reset     &bootloader    &none          &none          &studio_unlock
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 4 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                &none           &none          &none          &none          &none          &none          &bt BT_CLR_ALL &bt BT_CLR     &sys_reset     &bootloader    &studio_unlock         
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&encoder_bt_switch>;
         };
 
         /*
@@ -413,16 +413,12 @@
         layer_symbols {
             display-name = "Symbols 4";
             bindings = <
-                // 第 1 行：特殊符号
-                &none           &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &none
-                // 第 2 行：括号和引号
-                &kp TAB         &kp GRAVE      &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp SEMI       &kp APOS       &kp SLASH      &kp BACKSLASH  &none
-                // 第 3 行：Shift 符号
-                &kp LSHFT       &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 4 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&scroll_ud>;
         };
 
         /*
@@ -433,16 +429,12 @@
         layer_media {
             display-name = "Media 5";
             bindings = <
-                // 第 1 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 2 行：媒体控制
-                &none           &none          &none          &none          &none          &none          &none          &kp C_PREV     &kp C_PP       &kp C_NEXT     &kp C_STOP     &none
-                // 第 3 行：音量和亮度
-                &none           &none          &none          &none          &none          &none          &none          &kp C_MUTE     &kp C_VOL_DN   &kp C_VOL_UP   &kp C_BRI_UP   &kp C_BRI_DN
-                // 第 4 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none
             >;
-            sensor-bindings = <&encoder_brightness>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /*
@@ -454,14 +446,10 @@
         layer_navigation {
             display-name = "Navigation 6";
             bindings = <
-                // 第 1 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 2 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 3 行：导航键
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &kp PAGE_UP    &none          &none
-                // 第 4 行：完整导航
-                &none           &none          &none          &none          &kp HOME       &kp PAGE_DOWN  &kp END        &none          &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -474,16 +462,12 @@
         layer_mouse {
             display-name = "Mouse 7";
             bindings = <
-                // 第 1 行：鼠标上移 + 滚轮上滚
-                &none           &none          &mmv MOVE_UP     &none          &none          &none          &none          &msc SCRL_UP   &none          &none          &none          &none
-                // 第 2 行：鼠标左/下/右 + 滚轮下滚
-                &none           &mmv MOVE_LEFT &mmv MOVE_DOWN  &mmv MOVE_RIGHT &none         &none          &none          &msc SCRL_DOWN &none          &none          &none          &none
-                // 第 3 行：中键 + 后退/前进 + 编码器点击（ESC）
-                &none           &none          &none            &none          &none          &none          &none          &mkp MCLK      &mkp MB4       &mkp MB5       &encoder_click_esc ESC GRAVE &none
-                // 第 4 行：左键 + 右键
-                &none           &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none          &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none
             >;
-            sensor-bindings = <&scroll_ud>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /*
@@ -497,14 +481,10 @@
         layer_system {
             display-name = "System 8";
             bindings = <
-                // 第 1 行：系统功能键
-                &none           &kp INSERT     &kp DELETE     &kp PAUSE_BREAK &kp PSCRN     &kp SLCK       &kp HOME       &kp END        &kp PAGE_UP    &kp PAGE_DOWN  &none          &none
-                // 第 2 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 3 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 4 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -517,16 +497,12 @@
         layer_bluetooth {
             display-name = "Bluetooth 9";
             bindings = <
-                // 第 1 行：蓝牙设备选择
-                &none           &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 2 行：蓝牙清除 + 断开
-                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR     &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none
-                // 第 3 行：清除所有配对 + 邮箱宏
-                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &none          &none          &none          &email_macro
-                // 第 4 行：输出切换
-                &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none &none
             >;
-            sensor-bindings = <&encoder_bt_switch>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /*
