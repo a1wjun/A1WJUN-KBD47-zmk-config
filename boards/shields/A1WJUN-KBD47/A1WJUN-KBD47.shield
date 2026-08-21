@@ -1,0 +1,2 @@
+file(GLOB shield_sources "*.overlay")
+list(APPEND shield_sources "A1WJUN-KBD47.keymap")

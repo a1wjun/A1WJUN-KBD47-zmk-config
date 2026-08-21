@@ -1,68 +1,13 @@
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <dt-bindings/gpio/gpio.h>
 #include <physical_layouts.dtsi>
+#include "A1WJUN-KBD47.dtsi"   // 引入纯物理布局
 
 / {
-    physical_layout0: physical_layout_0 {
-        compatible = "zmk,physical-layout";
-        display-name = "A1WJUN_KBD47";
-        kscan = <&kscan0>;
-        transform = <&default_transform>;
-
-        keys
-            = <&key_physical_attrs 100 100    0    0       0     0     0>
-            , <&key_physical_attrs 100 100  100    0       0     0     0>
-            , <&key_physical_attrs 100 100  200    0       0     0     0>
-            , <&key_physical_attrs 100 100  300    0       0     0     0>
-            , <&key_physical_attrs 100 100  400    0       0     0     0>
-            , <&key_physical_attrs 100 100  500    0       0     0     0>
-            , <&key_physical_attrs 100 100  600    0       0     0     0>
-            , <&key_physical_attrs 100 100  700    0       0     0     0>
-            , <&key_physical_attrs 100 100  800    0       0     0     0>
-            , <&key_physical_attrs 100 100  900    0       0     0     0>
-            , <&key_physical_attrs 100 100 1000    0       0     0     0>
-            , <&key_physical_attrs 100 100 1100    0       0     0     0>
-            , <&key_physical_attrs 100 100    0  100       0     0     0>
-            , <&key_physical_attrs 100 100  100  100       0     0     0>
-            , <&key_physical_attrs 100 100  200  100       0     0     0>
-            , <&key_physical_attrs 100 100  300  100       0     0     0>
-            , <&key_physical_attrs 100 100  400  100       0     0     0>
-            , <&key_physical_attrs 100 100  500  100       0     0     0>
-            , <&key_physical_attrs 100 100  600  100       0     0     0>
-            , <&key_physical_attrs 100 100  700  100       0     0     0>
-            , <&key_physical_attrs 100 100  800  100       0     0     0>
-            , <&key_physical_attrs 100 100  900  100       0     0     0>
-            , <&key_physical_attrs 100 100 1000  100       0     0     0>
-            , <&key_physical_attrs 100 100 1100  100       0     0     0>
-            , <&key_physical_attrs 100 100    0  200       0     0     0>
-            , <&key_physical_attrs 100 100  100  200       0     0     0>
-            , <&key_physical_attrs 100 100  200  200       0     0     0>
-            , <&key_physical_attrs 100 100  300  200       0     0     0>
-            , <&key_physical_attrs 100 100  400  200       0     0     0>
-            , <&key_physical_attrs 100 100  500  200       0     0     0>
-            , <&key_physical_attrs 100 100  600  200       0     0     0>
-            , <&key_physical_attrs 100 100  700  200       0     0     0>
-            , <&key_physical_attrs 100 100  800  200       0     0     0>
-            , <&key_physical_attrs 100 100  900  200       0     0     0>
-            , <&key_physical_attrs 100 100 1000  200       0     0     0>
-            , <&key_physical_attrs 100 100 1100  200       0     0     0>
-            , <&key_physical_attrs 100 100    0  300       0     0     0>
-            , <&key_physical_attrs 100 100  100  300       0     0     0>
-            , <&key_physical_attrs 100 100  200  300       0     0     0>
-            , <&key_physical_attrs 100 100  300  300       0     0     0>
-            , <&key_physical_attrs 100 100  400  300       0     0     0>
-            , <&key_physical_attrs 100 100  500  300       0     0     0>
-            , <&key_physical_attrs 100 100  600  300       0     0     0>
-            , <&key_physical_attrs 100 100  800  300       0     0     0>
-            , <&key_physical_attrs 100 100  900  300       0     0     0>
-            , <&key_physical_attrs 100 100 1000  300       0     0     0>
-            , <&key_physical_attrs 100 100 1100  300       0     0     0>
-            ;
-    };
-
+    // ========== 矩阵变换 ==========
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
-        columns = <12>; rows = <4>;
+        columns = <12>;
+        rows = <4>;
         map = <
             RC(0,0)  RC(0,1)  RC(0,2)  RC(0,3)  RC(0,4)  RC(0,5)  RC(0,6)  RC(0,7)  RC(0,8)  RC(0,9)  RC(0,10) RC(0,11)
             RC(1,0)  RC(1,1)  RC(1,2)  RC(1,3)  RC(1,4)  RC(1,5)  RC(1,6)  RC(1,7)  RC(1,8)  RC(1,9)  RC(1,10) RC(1,11)
@@ -71,43 +16,49 @@
         >;
     };
 
+    // ========== GPIO 扫描驱动 ==========
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
         status = "okay";
         wakeup-source;
         diode-direction = "col2row";
 
-        debounce-press-ms       = <3>;
-        debounce-release-ms     = <3>;
+        // 去抖 3ms，与 .conf 中 ZMK_KSCAN_DEBOUNCE_*_MS=3 保持一致
+        // 兼顾响应速度与稳定性，避免 1ms 过于激进导致双击/误触
+        debounce-press-ms = <3>;
+        debounce-release-ms = <3>;
         debounce-scan-period-ms = <1>;
 
-        col-gpios =
-            <&pro_micro 21 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro 20 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro 19 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro 18 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro 15 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro 14 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro  9 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro  8 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro  7 (GPIO_ACTIVE_HIGH)>,
-            <&pro_micro  6 (GPIO_ACTIVE_HIGH)>,
-            <&gpio0 8 (GPIO_ACTIVE_HIGH)>,
-            <&gpio0 6 (GPIO_ACTIVE_HIGH)>;
+        col-gpios
+           = <&pro_micro 21 GPIO_ACTIVE_HIGH>  // COL0
+            , <&pro_micro 20 GPIO_ACTIVE_HIGH> // COL1
+            , <&pro_micro 19 GPIO_ACTIVE_HIGH> // COL2
+            , <&pro_micro 18 GPIO_ACTIVE_HIGH> // COL3
+            , <&pro_micro 15 GPIO_ACTIVE_HIGH> // COL4
+            , <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL5
+            , <&pro_micro  9 GPIO_ACTIVE_HIGH> // COL6
+            , <&pro_micro  8 GPIO_ACTIVE_HIGH> // COL7
+            , <&pro_micro  7 GPIO_ACTIVE_HIGH> // COL8
+            , <&pro_micro  6 GPIO_ACTIVE_HIGH> // COL9
+            , <&gpio0 8 GPIO_ACTIVE_HIGH>      // COL10
+            , <&gpio0 6 GPIO_ACTIVE_HIGH>      // COL11
+            ;
 
-        row-gpios =
-            <&pro_micro  4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-            <&pro_micro  5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-            <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-            <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        row-gpios
+            = <&pro_micro  4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW0
+            , <&pro_micro  5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1
+            , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2
+            , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3
+            ;
     };
 
+    // ========== 旋转编码器 ==========
     encoder0: encoder_0 {
         compatible = "alps,ec11";
         status = "okay";
         a-gpios = <&gpio1 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         b-gpios = <&gpio1 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps   = <20>;
+        steps = <20>;
     };
 
     sensors: sensors {
@@ -116,10 +67,32 @@
         triggers-per-rotation = <10>;
     };
 
+    // ========== ZMK Studio 支持 ==========
+    studio: studio {
+        compatible = "zmk,studio";
+        layout = <&physical_layout_0>;
+    };
+
+    // ========== chosen 节点 ==========
     chosen {
-        zmk,kscan            = <&kscan0>;
-        zmk,physical-layout  = <&physical_layout0>;
-        zmk,sensors          = <&sensors>;
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout_0;
+        zmk,sensors = &sensors;
+        // 电池：继承 nice_nano_v2 板级自带的 vbatt (zmk,battery-nrf-vddh)
+        // 无需额外定义，VDDH 直接读电池电压 → 真实电量通过 BT_BAS 上报
+    };
+
+    // ========== 自定义行为 ==========
+    behaviors {
+        studio_unlock: studio_unlock {
+            compatible = "zmk,behavior-studio-unlock";
+            #binding-cells = <0>;
+        };
+    };
+
+    // ========== 物理布局 ==========
+    physical_layout_0: physical_layout_0 {
+        status = "okay";
+        transform = <&default_transform>;
     };
 };
-
