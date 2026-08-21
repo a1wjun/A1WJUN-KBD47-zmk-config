@@ -171,7 +171,18 @@
         timestamp_macro: timestamp_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp N2>, <&kp N0>, <&kp N2>, <&kp N6>, <&kp MINUS>, <&kp N0>, <&kp N8>, <&kp MINUS>, <&kp N2>, <&kp N1>;
+            bindings = <
+                &kp N2
+                &kp N0
+                &kp N2
+                &kp N6
+                &kp MINUS
+                &kp N0
+                &kp N8
+                &kp MINUS
+                &kp N2
+                &kp N1
+            >;
             wait-ms = <10>;
             tap-ms = <10>;
         };
@@ -180,7 +191,24 @@
         code_console_macro: code_console_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp C>, <&kp O>, <&kp N>, <&kp S>, <&kp O>, <&kp L>, <&kp E>, <&kp DOT>, <&kp L>, <&kp O>, <&kp G>, <&kp LPAREN>, <&kp APOS>, <&kp APOS>, <&kp RPAREN>, <&kp SEMI>;
+            bindings = <
+                &kp C
+                &kp O
+                &kp N
+                &kp S
+                &kp O
+                &kp L
+                &kp E
+                &kp DOT
+                &kp L
+                &kp O
+                &kp G
+                &kp LPAREN
+                &kp APOS
+                &kp APOS
+                &kp RPAREN
+                &kp SEMI
+            >;
             wait-ms = <10>;
             tap-ms = <10>;
         };
