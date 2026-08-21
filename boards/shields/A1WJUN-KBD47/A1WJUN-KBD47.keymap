@@ -87,50 +87,42 @@
 
         /*
          * scroll_ud (编码器滚动行为)
-         * 旋转：滚轮上下，点击：中键
          */
         scroll_ud: behavior_scroll_ud {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
             tap-ms = <20>;
-            tap-bindings = <&mkp MCLK>;  // 点击编码器触发中键
         };
 
         /*
          * encoder_brightness (编码器亮度调节)
-         * 旋转：亮度调节，点击：无操作
          */
         encoder_brightness: behavior_brightness {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_BRI_DN>, <&kp C_BRI_UP>;
             tap-ms = <20>;
-            tap-bindings = <&none>;  // 点击无操作
         };
 
         /*
          * encoder_media (编码器媒体控制)
-         * 旋转：上/下一曲，点击：播放/暂停
          */
         encoder_media: behavior_media {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_PREV>, <&kp C_NEXT>;
             tap-ms = <20>;
-            tap-bindings = <&kp C_PP>;  // 点击触发播放/暂停
         };
 
         /*
          * encoder_bt_switch (编码器蓝牙切换)
-         * 旋转：切换设备，点击：断开当前连接
          */
         encoder_bt_switch: behavior_bt_switch {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&bt BT_PRV>, <&bt BT_NXT>;
             tap-ms = <20>;
-            tap-bindings = <&bt BT_DISC 0>;  // 点击断开当前设备
         };
     };
 
