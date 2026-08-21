@@ -757,7 +757,12 @@
      * ========================================
      * 组合键 (Combos)
      * ========================================
-     */
+     *  0  1  2  3  4  5  6  7  8  9 10 11
+     * 12 13 14 15 16 17 18 19 20 21 22 23
+     * 24 25 26 27 28 29 30 31 32 33 34 35
+     * 36 37 38 39 40 41 42 43 44 45 46
+      */
+
     combos {
         compatible = "zmk,combos";
 
@@ -771,57 +776,57 @@
         };
 
         combo_print {
-            timeout-ms = <80>;  // Ctrl+P 打印
-            key-positions = <11 12>;
+            timeout-ms = <80>;
+            key-positions = <9 10>;  // 慢速组合：O + P = Ctrl+P
             bindings = <&kp LC(P)>;
             layers = <0>;
         };
 
         combo_select_all {
             timeout-ms = <50>;
-            key-positions = <13 14>;  // 普通组合：TAB + A = Ctrl+A
+            key-positions = <12 13>;  // 普通组合：TAB + A = Ctrl+A
             bindings = <&kp LC(A)>;
             layers = <0>;
         };
 
         combo_save {
             timeout-ms = <50>;  
-            key-positions = <14 15>;  // 普通组合：A + S = Ctrl+S
+            key-positions = <13 14>;  // 普通组合：A + S = Ctrl+S
             bindings = <&kp LC(S)>;
             layers = <0>;
         };
 
         combo_undo {
             timeout-ms = <50>;
-            key-positions = <25 26>;  // 普通组合：LSHFT + Z = Ctrl+Z
+            key-positions = <24 25>;  // 普通组合：LSHFT + Z = Ctrl+Z
             bindings = <&kp LC(Z)>;
             layers = <0>;
         };
 
         combo_cut {
             timeout-ms = <50>;
-            key-positions = <26 27>;  // 普通组合：Z + X = Ctrl+X
+            key-positions = <25 26>;  // 普通组合：Z + X = Ctrl+X
             bindings = <&kp LC(X)>;
             layers = <0>;
         };
 
         combo_copy {
             timeout-ms = <50>;
-            key-positions = <27 28>;  // 普通组合：X + C = Ctrl+C
+            key-positions = <26 27>;  // 普通组合：X + C = Ctrl+C
             bindings = <&kp LC(C)>;
             layers = <0>;
         };
 
         combo_paste {
             timeout-ms = <50>;
-            key-positions = <28 29>;  // 普通组合：C + V = Ctrl+V
+            key-positions = <27 28>;  // 普通组合：C + V = Ctrl+V
             bindings = <&kp LC(V)>;
             layers = <0>;
         };
 
         combo_redo {
             timeout-ms = <50>;
-            key-positions = <29 30>;  // 普通组合：V + B = Ctrl+Y 
+            key-positions = <28 29>;  // 普通组合：V + B = Ctrl+Y 
             bindings = <&kp LC(Y)>;
             layers = <0>;
         };
