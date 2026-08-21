@@ -133,37 +133,6 @@
             tap-ms = <20>;
         };
     };
-
-    /*
-     * ========================================
-     * 宏 (Macros) 定义
-     * ========================================
-     * 
-     * 宏可以绑定一系列按键行为，实现一键输入常用内容。
-     */
-    macros {
-        // 一键输入邮箱
-        email_macro: email_macro {
-            compatible = "zmk,behavior-macro";
-            #macro-binding-cells = <0>;
-            bind = <
-                &kp E &kp A &kp T &kp A &kp A &kp A &kp A &kp A  // 占位，实际使用下面方式
-            >;
-            wait-ms = <5>;
-            tap-ms = <5>;
-        };
-
-        // 一键截图 (Windows: Win+Shift+S)
-        screenshot_macro: screenshot_macro {
-            compatible = "zmk,behavior-macro";
-            #macro-binding-cells = <0>;
-            bind = <
-                &mo 1  // 激活层1用于截图
-            >;
-            wait-ms = <5>;
-            tap-ms = <5>;
-        };
-    };
 };
 
 /*
