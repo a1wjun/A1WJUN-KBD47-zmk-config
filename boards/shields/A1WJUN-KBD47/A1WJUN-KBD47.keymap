@@ -153,6 +153,24 @@
             wait-ms = <10>;
             tap-ms = <10>;
         };
+
+        // 时间戳宏：输出日期格式 2026-08-21
+        timestamp_macro: timestamp_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp N2>, <&kp N0>, <&kp N2>, <&kp N6>, <&kp MINUS>, <&kp N0>, <&kp N8>, <&kp MINUS>, <&kp N2>, <&kp N1>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
+
+        // 代码片段宏：输出 console.log(''); 
+        code_console_macro: code_console_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C>, <&kp O>, <&kp N>, <&kp S>, <&kp O>, <&kp L>, <&kp E>, <&kp DOT>, <&kp L>, <&kp O>, <&kp G>, <&kp LPAREN>, <&kp APOS>, <&kp APOS>, <&kp RPAREN>, <&kp SEMI>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
     };
 };
 
@@ -406,10 +424,10 @@
                 &none           &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 2 行：蓝牙清除 + 断开
                 &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR     &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none
-                // 第 3 行：清除所有配对 + 邮箱宏
-                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &none          &none          &none          &email_macro
-                // 第 4 行：输出切换
-                &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none
+                // 第 3 行：清除所有配对 + 宏
+                &none           &none          &none          &none          &none          &none          &none          &bt BT_CLR_ALL &timestamp_macro &code_console_macro &none          &none
+                // 第 4 行：输出切换 + 邮箱宏
+                &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &email_macro   &none          &none          &none
             >;
             sensor-bindings = <&encoder_bt_switch>;
         };
