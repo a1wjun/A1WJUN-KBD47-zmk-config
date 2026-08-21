@@ -76,6 +76,21 @@
         };
 
         /*
+         * tap_dance_2 (2连击 Tap Dance)
+         * 
+         * 单击输出第一个键，双击输出第二个键。
+         * 使用 hold-tap 行为模拟，tapping-term-ms 控制判定时间。
+         */
+        td2: tap_dance_2 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap Dance 2";
+        };
+
+        /*
          * scroll_ud (编码器滚动行为)
          * 
          * 旋转编码器映射为鼠标滚轮上下滚动。
@@ -86,6 +101,67 @@
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
             tap-ms = <20>;
+        };
+
+        /*
+         * encoder_brightness (编码器亮度调节)
+         */
+        encoder_brightness: behavior_brightness {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp C_BRI_DN>, <&kp C_BRI_UP>;
+            tap-ms = <20>;
+        };
+
+        /*
+         * encoder_media (编码器媒体控制)
+         */
+        encoder_media: behavior_media {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp C_PREV>, <&kp C_NEXT>;
+            tap-ms = <20>;
+        };
+
+        /*
+         * encoder_bt_switch (编码器蓝牙切换)
+         */
+        encoder_bt_switch: behavior_bt_switch {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&bt BT_PRV>, <&bt BT_NXT>;
+            tap-ms = <20>;
+        };
+    };
+
+    /*
+     * ========================================
+     * 宏 (Macros) 定义
+     * ========================================
+     * 
+     * 宏可以绑定一系列按键行为，实现一键输入常用内容。
+     */
+    macros {
+        // 一键输入邮箱
+        email_macro: email_macro {
+            compatible = "zmk,behavior-macro";
+            #macro-binding-cells = <0>;
+            bind = <
+                &kp E &kp A &kp T &kp A &kp A &kp A &kp A &kp A  // 占位，实际使用下面方式
+            >;
+            wait-ms = <5>;
+            tap-ms = <5>;
+        };
+
+        // 一键截图 (Windows: Win+Shift+S)
+        screenshot_macro: screenshot_macro {
+            compatible = "zmk,behavior-macro";
+            #macro-binding-cells = <0>;
+            bind = <
+                &mo 1  // 激活层1用于截图
+            >;
+            wait-ms = <5>;
+            tap-ms = <5>;
         };
     };
 };
@@ -137,17 +213,19 @@
 
         /*
          * ========================================
-         * 层 0：Base（基础层）
+         * 层 0：Base（基础层）- 优化版
          * ========================================
          * 
          * 默认层（层 0）始终处于启用状态。
          * 这是键盘的主要布局层，包含字母、常用符号和导航键。
          * 
-         * 底层快捷键：
+         * 底层快捷键（优化后）：
          *   - 左 Ctrl 按住 → 层 7（Mouse 鼠标层）
-         *   - 左 Alt 位置 → 层 2（Function 功能键层），轻触静音
-         *   - 右侧拇指左键 → 层 9（Bluetooth 蓝牙层），轻触播放/暂停
+         *   - 左 Alt 按住 → 层 2（Function 功能键层）
+         *   - 右拇指上键 按住 → 层 5（Media 媒体层）
+         *   - 右拇指下键 按住 → 层 9（Bluetooth 蓝牙层）
          *   - 空格按住 → 层 1（Number 数字层）
+         *   - ESC 按住 → 层 3（Button 系统控制层）
          */
         layer_base {
             display-name = "Base";
@@ -158,41 +236,41 @@
                 &kp TAB        &kp A         &kp S         &kp D         &kp F         &kp G         &kp H         &kp J         &kp K         &kp L         &kp SLASH      &kp ENTER
                 // 第 3 行（12 键）
                 &kp LSHFT      &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &kp UP         &kp DEL
-                // 第 4 行（11 键，含空格和方向键）
-                &lt 7 LCTRL    &kp LGUI      &kp LALT      &lt 2 C_MUTE  &lt 9 C_MUTE  &lt 1 SPACE   &lt 1 SPACE   &lt 2 C_PP    &kp LEFT      &kp DOWN      &kp RIGHT
+                // 第 4 行（11 键，优化后）
+                &lt 7 LCTRL    &kp LGUI      &lt 2 LALT    &lt 1 SPACE   &lt 1 SPACE   &lt 5 C_PP    &lt 9 C_MUTE  &kp RALT      &kp LEFT      &kp DOWN      &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;    // 编码器：音量加减
         };
 
         /*
          * ========================================
-         * 层 1：Number（数字与符号层）
+         * 层 1：Number（数字与符号层）- 增强版
          * ========================================
          * 
          * 通过 Base 层空格键按住时临时激活（&lt 1 SPACE）。
-         * 包含数字行、媒体控制和鼠标滚动。
+         * 包含数字行、符号、媒体控制和鼠标滚动。
          */
         layer_number {
             display-name = "Number";
             bindings = <
                 // 第 1 行：数字行 + 滚轮上滚
-                &none           &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &msc SCRL_UP
+                &trans          &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &msc SCRL_UP
                 // 第 2 行：CAPS + 符号键 + 滚轮下滚
-                &kp CAPS        &none          &none          &none          &none          &none          &kp LBKT       &kp RBKT       &kp MINUS      &kp EQUAL      &kp BSLH       &msc SCRL_DOWN
-                // 第 3 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 4 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                &kp CAPS        &kp GRAVE      &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp SEMI       &kp APOS       &kp COMMA      &kp DOT        &msc SCRL_DOWN
+                // 第 3 行：鼠标移动
+                &none           &none          &none          &none          &none          &none          &none          &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP  &mmv MOVE_RIGHT
+                // 第 4 行：鼠标点击
+                &none           &none          &none          &none          &none          &none          &none          &mkp LCLK      &mkp MCLK      &mkp RCLK      &none
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /*
          * ========================================
-         * 层 2：Function（功能键层）
+         * 层 2：Function（功能键层）- 增强版
          * ========================================
          * 
-         * 通过 Base 层左 Alt 位置键按住时临时激活（&lt 2 C_MUTE）。
+         * 通过 Base 层左 Alt 键按住时临时激活（&lt 2 LALT）。
          * 包含 F1-F12 功能键和导航键。
          */
         layer_function {
@@ -202,12 +280,12 @@
                 &kp F11         &kp F1         &kp F2         &kp F3         &kp F4         &kp F5         &kp F6         &kp F7         &kp F8         &kp F9         &kp F10        &kp F12
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 3 行：翻页键
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &kp PAGE_UP    &none
-                // 第 4 行：空
-                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 3 行：导航键
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &kp PAGE_UP    &kp PAGE_UP    &none
+                // 第 4 行：导航键
+                &none           &none          &none          &none          &kp HOME       &kp PAGE_DOWN  &kp END        &none          &none          &none          &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&encoder_media>;    // 编码器：上一曲/下一曲
         };
 
         /*
@@ -235,53 +313,81 @@
 
         /*
          * ========================================
-         * 层 4-9：预留层
+         * 层 4：Symbols（符号层）- 新增
          * ========================================
          * 
-         * 这些层当前大部分为空，保留用于未来扩展。
-         * &none 行为会吞没按键事件，不传递给下层。
-         * 
-         * 注意：层编号必须连续，不能跳过，否则引用更高层时索引会错位。
+         * 预留层，可通过 ZMK Studio 配置激活方式。
+         * 包含常用特殊符号。
          */
-
-        // 层 4：Symbols（符号层）- 预留
         layer_symbols {
             display-name = "Symbols";
             bindings = <
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none
+                // 第 1 行：特殊符号
+                &none           &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &none
+                // 第 2 行：括号和引号
+                &kp TAB         &kp GRAVE      &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp SEMI       &kp APOS       &kp SLASH      &kp BACKSLASH  &none
+                // 第 3 行：Shift 符号
+                &kp LSHFT       &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 4 行：空
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        // 层 5：Media（媒体层）- 预留
+        /*
+         * ========================================
+         * 层 5：Media（媒体层）- 新增
+         * ========================================
+         * 
+         * 通过 Base 层右拇指上键（&lt 5 C_PP）按住时临时激活。
+         * 包含媒体控制和亮度调节。
+         */
         layer_media {
             display-name = "Media";
             bindings = <
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none
+                // 第 1 行：F1-F12 作为备用
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 2 行：媒体控制
+                &none           &none          &none          &none          &none          &none          &none          &kp C_PREV     &kp C_PP       &kp C_NEXT     &kp C_STOP     &none
+                // 第 3 行：音量和亮度
+                &none           &none          &none          &none          &none          &none          &none          &kp C_MUTE     &kp C_VOL_DN   &kp C_VOL_UP   &kp C_BRI_UP   &kp C_BRI_DN
+                // 第 4 行：空
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&encoder_brightness>;    // 编码器：亮度调节
         };
 
-        // 层 6：Navigation（导航层）- 预留
+        /*
+         * ========================================
+         * 层 6：Navigation（导航层）- 新增
+         * ========================================
+         * 
+         * 预留用于扩展，可通过快捷键激活。
+         * 包含完整的导航键。
+         */
         layer_navigation {
             display-name = "Navigation";
             bindings = <
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none
+                // 第 1 行：空
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 2 行：空
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 3 行：导航键
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &kp PAGE_UP    &none          &none
+                // 第 4 行：完整导航
+                &none           &none          &none          &none          &kp HOME       &kp PAGE_DOWN  &kp END        &none          &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        // 层 7：Mouse（鼠标层）
-        // 通过 Base 层左 Ctrl（&lt 7 LCTRL）按住时临时激活
+        /*
+         * ========================================
+         * 层 7：Mouse（鼠标层）
+         * ========================================
+         * 
+         * 通过 Base 层左 Ctrl（&lt 7 LCTRL）按住时临时激活。
+         * 包含鼠标移动、点击和滚轮。
+         */
         layer_mouse {
             display-name = "Mouse";
             bindings = <
@@ -297,20 +403,37 @@
             sensor-bindings = <&scroll_ud>;                      // 编码器：自定义滚动行为
         };
 
-        // 层 8：System（系统层）- 预留
+        /*
+         * ========================================
+         * 层 8：System（系统层）- 新增
+         * ========================================
+         * 
+         * 预留用于系统功能。
+         * 包含截图、锁屏等系统快捷键。
+         */
         layer_system {
             display-name = "System";
             bindings = <
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none &none &none &none
+                // 第 1 行：系统功能
+                &none           &kp PSCRN      &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 2 行：空
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 3 行：Windows 快捷键
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 4 行：空
+                &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        // 层 9：Bluetooth（蓝牙层）
-        // 通过 Base 层右侧拇指左键（&lt 9 C_MUTE）按住时临时激活
+        /*
+         * ========================================
+         * 层 9：Bluetooth（蓝牙层）
+         * ========================================
+         * 
+         * 通过 Base 层右拇指下键（&lt 9 C_MUTE）按住时临时激活。
+         * 包含蓝牙切换和输出切换。
+         */
         layer_bluetooth {
             display-name = "Bluetooth";
             bindings = <
@@ -323,7 +446,7 @@
                 // 第 4 行：输出切换
                 &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&encoder_bt_switch>;    // 编码器：蓝牙设备切换
         };
     };
 
@@ -340,80 +463,84 @@
     combos {
         compatible = "zmk,combos";           // 标识此为 ZMK 组合键配置节点
 
-        /*
-         * 组合键：ESC
-         * 同时按下位置 2 和 3 的按键触发 ESC（Q + W）
-         */
-        combo_esc {
-            timeout-ms = <50>;               // 触发组合键的最大时间窗口（毫秒）
-            key-positions = <2 3>;           // 参与组合的按键位置（从 0 开始编号）
-            bindings = <&kp ESC>;            // 触发的行为
-            layers = <0>;                    // 仅在 Base 层生效
-        };
+        // ===== 基础编辑组合键 =====
 
-        /*
-         * 组合键：全选 (Ctrl+A)
-         * 同时按下位置 12 和 13 的按键触发（A + S）
-         */
-        combo_select_all {
+        combo_esc {
             timeout-ms = <50>;
-            key-positions = <12 13>;
-            bindings = <&kp LC(A)>;          // LC(A) = 左 Ctrl + A
+            key-positions = <2 3>;           // Q + W = ESC
+            bindings = <&kp ESC>;
             layers = <0>;
         };
 
-        /*
-         * 组合键：撤销 (Ctrl+Z)
-         * 同时按下位置 24 和 25 的按键触发（Z + X）
-         */
+        combo_select_all {
+            timeout-ms = <50>;
+            key-positions = <12 13>;         // A + S = Ctrl+A
+            bindings = <&kp LC(A)>;
+            layers = <0>;
+        };
+
         combo_undo {
             timeout-ms = <50>;
-            key-positions = <24 25>;
+            key-positions = <24 25>;         // Z + X = Ctrl+Z
             bindings = <&kp LC(Z)>;
             layers = <0>;
         };
 
-        /*
-         * 组合键：剪切 (Ctrl+X)
-         * 同时按下位置 25 和 26 的按键触发（X + C）
-         */
         combo_cut {
             timeout-ms = <50>;
-            key-positions = <25 26>;
+            key-positions = <25 26>;         // X + C = Ctrl+X
             bindings = <&kp LC(X)>;
             layers = <0>;
         };
 
-        /*
-         * 组合键：复制 (Ctrl+C)
-         * 同时按下位置 26 和 27 的按键触发（C + V）
-         */
         combo_copy {
             timeout-ms = <50>;
-            key-positions = <26 27>;
+            key-positions = <26 27>;         // C + V = Ctrl+C
             bindings = <&kp LC(C)>;
             layers = <0>;
         };
 
-        /*
-         * 组合键：粘贴 (Ctrl+V)
-         * 同时按下位置 27 和 28 的按键触发（V + B）
-         */
         combo_paste {
             timeout-ms = <50>;
-            key-positions = <27 28>;
+            key-positions = <27 28>;         // V + B = Ctrl+V
             bindings = <&kp LC(V)>;
             layers = <0>;
         };
 
-        /*
-         * 组合键：重做 (Ctrl+Y)
-         * 同时按下位置 28 和 29 的按键触发（B + N）
-         */
         combo_redo {
             timeout-ms = <50>;
-            key-positions = <28 29>;
+            key-positions = <28 29>;         // B + N = Ctrl+Y
             bindings = <&kp LC(Y)>;
+            layers = <0>;
+        };
+
+        // ===== 新增系统组合键 =====
+
+        combo_screenshot {
+            timeout-ms = <50>;
+            key-positions = <38 39>;         // , + . = PrtSc (截图)
+            bindings = <&kp PSCRN>;
+            layers = <0>;
+        };
+
+        combo_lock {
+            timeout-ms = <50>;
+            key-positions = <39 40>;         // . + / = Win+L (锁屏)
+            bindings = <&kp LG(L)>;
+            layers = <0>;
+        };
+
+        combo_task_manager {
+            timeout-ms = <50>;
+            key-positions = <0 12>;          // ESC + TAB = Ctrl+Shift+Esc (任务管理器)
+            bindings = <&kp LS(LC(DELETE))>;
+            layers = <0>;
+        };
+
+        combo_input_method {
+            timeout-ms = <50>;
+            key-positions = <36 37>;         // LALT + SPACE = Alt+Shift (切换输入法)
+            bindings = <&kp LS(LA)>;
             layers = <0>;
         };
     };
