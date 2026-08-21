@@ -15,9 +15,6 @@
 
 /*
  * 层索引定义（共10层）
- * 
- * 使用 C 预处理器为层定义名称，使键绑定更易读，也便于日后调整层顺序。
- * 层编号从 0 开始，按照在 keymap 节点中定义的顺序排列。
  */
 #define Base        0
 #define Number      1
@@ -35,66 +32,61 @@
      * ========================================
      * 行为 (Behaviors) 定义
      * ========================================
-     * 
-     * ZMK 的 "行为" 是可绑定到按键、传感器或层上的动作。
-     * 行为可以接收参数来改变其具体表现。
      */
 
     behaviors {
         /*
          * mod_tap (Mod-Tap 行为)
-         * 
-         * 按住时输出第一个键码（通常为修饰键），轻触时输出第二个键码。
-         * 默认使用 "hold-preferred" 风格：按住超过 200ms 或期间按下其他键时触发 hold 行为。
-         * 
-         * 官方文档：https://zmk.dev/docs/keymaps/behaviors/hold-tap#mod-tap
          */
         mt: mod_tap {
-            compatible = "zmk,behavior-hold-tap";    // 绑定到 ZMK 的 hold-tap 行为驱动
-            #binding-cells = <2>;                    // 需要 2 个参数：hold 键码 + tap 键码
-            flavor = "hold-preferred";               // hold 优先策略
-            tapping-term-ms = <200>;                 // 判定 tap 的最大时间阈值（毫秒）
-            bindings = <&kp>, <&kp>;                 // hold 和 tap 都使用按键行为
-            display-name = "Mod-Tap";                // ZMK Studio 中显示的名称
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Mod-Tap";
         };
 
         /*
          * layer_tap (Layer-Tap 行为)
-         * 
-         * 按住时启用指定层，轻触时输出指定按键。
-         * 默认使用 "tap-preferred" 风格。
-         * 
-         * 官方文档：https://zmk.dev/docs/keymaps/behaviors/hold-tap#layer-tap
          */
         lt: layer_tap {
-            compatible = "zmk,behavior-hold-tap";    // 绑定到 ZMK 的 hold-tap 行为驱动
-            #binding-cells = <2>;                    // 需要 2 个参数：层编号 + tap 键码
-            flavor = "tap-preferred";                // tap 优先策略
-            tapping-term-ms = <200>;                 // 判定 tap 的最大时间阈值（毫秒）
-            bindings = <&mo>, <&kp>;                 // hold 时启用层（&mo），tap 时输出按键（&kp）
-            display-name = "Layer-Tap";              // ZMK Studio 中显示的名称
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+            display-name = "Layer-Tap";
         };
 
         /*
-         * tap_dance_2 (2连击 Tap Dance)
-         * 
-         * 单击输出第一个键，双击输出第二个键。
-         * 使用 hold-tap 行为模拟，tapping-term-ms 控制判定时间。
+         * tap_dance_esc (ESC Tap Dance)
+         * 单击 = ESC，双击 = ` (反引号)
          */
-        td2: tap_dance_2 {
+        td_esc: tap_dance_esc {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <150>;
             bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance 2";
+            display-name = "Tap Dance ESC";
+        };
+
+        /*
+         * tap_dance_tab (TAB Tap Dance)
+         * 单击 = TAB，双击 = CAPSLOCK
+         */
+        td_tab: tap_dance_tab {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <150>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap Dance TAB";
         };
 
         /*
          * scroll_ud (编码器滚动行为)
-         * 
-         * 旋转编码器映射为鼠标滚轮上下滚动。
-         * 顺时针滚动 = SCRL_UP，逆时针滚动 = SCRL_DOWN。
          */
         scroll_ud: behavior_scroll_ud {
             compatible = "zmk,behavior-sensor-rotate";
@@ -133,37 +125,51 @@
             tap-ms = <20>;
         };
     };
+
+    /*
+     * ========================================
+     * 宏 (Macros) 定义
+     * ========================================
+     */
+    macros {
+        // 一键输入 "Hello"
+        hello_macro: hello_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bind = <&kp H>, <&kp E>, <&kp L>, <&kp L>, <&kp O>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
+    };
 };
 
 /*
  * ========================================
- * 鼠标移动与滚轮加速配置
+ * 鼠标移动与滚轮加速配置 - 优化版
  * ========================================
- * 
- * 配置鼠标指针移动和滚轮的加速度曲线参数。
  */
 
-// 鼠标移动行为（指针移动）
+// 鼠标移动行为（指针移动）- 更快响应
 &mmv {
-    x-input-code = <INPUT_REL_X>;          // X 轴相对移动
-    y-input-code = <INPUT_REL_Y>;          // Y 轴相对移动
-    time-to-max-speed-ms = <300>;          // 达到最大速度的时间（毫秒）
-    acceleration-exponent = <1>;           // 加速度指数（1 = 线性加速）
-    delay-ms = <0>;                        // 初始延迟（毫秒）
+    x-input-code = <INPUT_REL_X>;
+    y-input-code = <INPUT_REL_Y>;
+    time-to-max-speed-ms = <200>;          // 优化：300ms → 200ms（更快响应）
+    acceleration-exponent = <1>;
+    delay-ms = <0>;
 };
 
 // 鼠标滚轮行为
 &msc {
-    x-input-code = <INPUT_REL_HWHEEL>;     // 水平滚轮
-    y-input-code = <INPUT_REL_WHEEL>;      // 垂直滚轮
-    time-to-max-speed-ms = <300>;          // 达到最大速度的时间（毫秒）
-    acceleration-exponent = <0>;           // 加速度指数（0 = 无加速，恒定速度）
-    delay-ms = <0>;                        // 初始延迟（毫秒）
+    x-input-code = <INPUT_REL_HWHEEL>;
+    y-input-code = <INPUT_REL_WHEEL>;
+    time-to-max-speed-ms = <200>;          // 优化：300ms → 200ms
+    acceleration-exponent = <0>;
+    delay-ms = <0>;
 };
 
-// 软关机行为：按住 5000ms 触发
+// 软关机行为
 &soft_off {
-    hold-time-ms = <5000>;                 // 触发软关机所需的按住时间
+    hold-time-ms = <5000>;
 };
 
 / {
@@ -171,61 +177,54 @@
      * ========================================
      * 按键映射 (Keymap)
      * ========================================
-     * 
-     * keymap 节点本身没有属性，其子节点按顺序对应各层（从层 0 开始）。
-     * 每层的 bindings 列表必须按照键盘扫描配置中按键的定义顺序排列。
-     * 
-     * 官方文档：https://zmk.dev/docs/keymaps
      */
     keymap {
-        compatible = "zmk,keymap";           // 标识此为 ZMK 按键映射节点
+        compatible = "zmk,keymap";
 
         /*
          * ========================================
-         * 层 0：Base（基础层）- 优化版
+         * 层 0：Base（基础层）- 最终优化版
          * ========================================
          * 
-         * 默认层（层 0）始终处于启用状态。
-         * 这是键盘的主要布局层，包含字母、常用符号和导航键。
-         * 
-         * 底层快捷键（优化后）：
-         *   - 左 Ctrl 按住 → 层 7（Mouse 鼠标层）
-         *   - 左 Alt 按住 → 层 2（Function 功能键层）
-         *   - 右拇指上键 按住 → 层 5（Media 媒体层）
-         *   - 右拇指下键 按住 → 层 9（Bluetooth 蓝牙层）
-         *   - 空格按住 → 层 1（Number 数字层）
-         *   - ESC 按住 → 层 3（Button 系统控制层）
+         * 底层快捷键：
+         *   - ESC 单击=ESC，双击=` (Tap Dance)
+         *   - TAB 单击=TAB，双击=CAPS (Tap Dance)
+         *   - 左 Ctrl 按住 → 层 7（Mouse）
+         *   - 左 Alt 按住 → 层 2（Function）
+         *   - 右拇指上键 按住 → 层 5（Media）
+         *   - 右拇指下键 按住 → 层 9（Bluetooth）
+         *   - 空格按住 → 层 1（Number）
+         *   - 右 Alt 按住 → 层 4（Symbols）
+         *   - DEL 按住 → 层 6（Navigation）
+         *   - ↑ 按住 → 层 8（System）
          */
         layer_base {
             display-name = "Base";
             bindings = <
-                // 第 1 行（12 键）
-                &lt 3 ESC      &kp Q         &kp W         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P          &kp BACKSPACE
-                // 第 2 行（12 键）
-                &kp TAB        &kp A         &kp S         &kp D         &kp F         &kp G         &kp H         &kp J         &kp K         &kp L         &kp SLASH      &kp ENTER
-                // 第 3 行（12 键）
-                &kp LSHFT      &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &kp UP         &kp DEL
-                // 第 4 行（11 键，优化后）
-                &lt 7 LCTRL    &kp LGUI      &lt 2 LALT    &lt 1 SPACE   &lt 1 SPACE   &lt 5 C_PP    &lt 9 C_MUTE  &kp RALT      &kp LEFT      &kp DOWN      &kp RIGHT
+                // 第 1 行（12 键）- ESC 和 TAB 使用 Tap Dance
+                &td_esc ESC      &kp Q         &kp W         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P          &kp BACKSPACE
+                // 第 2 行（12 键）- TAB 使用 Tap Dance
+                &td_tab TAB      &kp A         &kp S         &kp D         &kp F         &kp G         &kp H         &kp J         &kp K         &kp L         &kp SLASH      &kp ENTER
+                // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
+                &kp LSHFT        &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &lt 6 UP       &lt 8 DEL
+                // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
+                &lt 7 LCTRL      &kp LGUI      &lt 2 LALT    &lt 1 SPACE   &lt 1 SPACE   &lt 5 C_PP    &lt 9 C_MUTE  &lt 4 RALT    &kp LEFT      &kp DOWN      &kp RIGHT
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;    // 编码器：音量加减
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         /*
          * ========================================
-         * 层 1：Number（数字与符号层）- 增强版
+         * 层 1：Number（数字与符号层）- 优化布局
          * ========================================
-         * 
-         * 通过 Base 层空格键按住时临时激活（&lt 1 SPACE）。
-         * 包含数字行、符号、媒体控制和鼠标滚动。
          */
         layer_number {
             display-name = "Number";
             bindings = <
                 // 第 1 行：数字行 + 滚轮上滚
                 &trans          &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &msc SCRL_UP
-                // 第 2 行：CAPS + 符号键 + 滚轮下滚
-                &kp CAPS        &kp GRAVE      &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp SEMI       &kp APOS       &kp COMMA      &kp DOT        &msc SCRL_DOWN
+                // 第 2 行：符号优化布局
+                &kp CAPS        &kp GRAVE      &kp MINUS      &kp EQUAL      &kp LBKT       &kp RBKT       &kp BSLH       &kp SEMI       &kp APOS       &none          &none          &msc SCRL_DOWN
                 // 第 3 行：鼠标移动
                 &none           &none          &none          &none          &none          &none          &none          &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP  &mmv MOVE_RIGHT
                 // 第 4 行：鼠标点击
@@ -236,11 +235,8 @@
 
         /*
          * ========================================
-         * 层 2：Function（功能键层）- 增强版
+         * 层 2：Function（功能键层）
          * ========================================
-         * 
-         * 通过 Base 层左 Alt 键按住时临时激活（&lt 2 LALT）。
-         * 包含 F1-F12 功能键和导航键。
          */
         layer_function {
             display-name = "Function";
@@ -254,16 +250,13 @@
                 // 第 4 行：导航键
                 &none           &none          &none          &none          &kp HOME       &kp PAGE_DOWN  &kp END        &none          &none          &none          &none
             >;
-            sensor-bindings = <&encoder_media>;    // 编码器：上一曲/下一曲
+            sensor-bindings = <&encoder_media>;
         };
 
         /*
          * ========================================
          * 层 3：Button（蓝牙与系统控制层）
          * ========================================
-         * 
-         * 通过 Base 层 ESC 键（&lt 3 ESC）按住时临时激活。
-         * 包含蓝牙配对、设备切换、复位和刷机功能。
          */
         layer_button {
             display-name = "Button";
@@ -282,11 +275,9 @@
 
         /*
          * ========================================
-         * 层 4：Symbols（符号层）- 新增
+         * 层 4：Symbols（符号层）- 已激活
          * ========================================
-         * 
-         * 预留层，可通过 ZMK Studio 配置激活方式。
-         * 包含常用特殊符号。
+         * 通过 Base 层右 Alt 按住激活
          */
         layer_symbols {
             display-name = "Symbols";
@@ -305,16 +296,13 @@
 
         /*
          * ========================================
-         * 层 5：Media（媒体层）- 新增
+         * 层 5：Media（媒体层）
          * ========================================
-         * 
-         * 通过 Base 层右拇指上键（&lt 5 C_PP）按住时临时激活。
-         * 包含媒体控制和亮度调节。
          */
         layer_media {
             display-name = "Media";
             bindings = <
-                // 第 1 行：F1-F12 作为备用
+                // 第 1 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 2 行：媒体控制
                 &none           &none          &none          &none          &none          &none          &none          &kp C_PREV     &kp C_PP       &kp C_NEXT     &kp C_STOP     &none
@@ -323,16 +311,14 @@
                 // 第 4 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
             >;
-            sensor-bindings = <&encoder_brightness>;    // 编码器：亮度调节
+            sensor-bindings = <&encoder_brightness>;
         };
 
         /*
          * ========================================
-         * 层 6：Navigation（导航层）- 新增
+         * 层 6：Navigation（导航层）- 已激活
          * ========================================
-         * 
-         * 预留用于扩展，可通过快捷键激活。
-         * 包含完整的导航键。
+         * 通过 Base 层 DEL 按住激活
          */
         layer_navigation {
             display-name = "Navigation";
@@ -353,9 +339,6 @@
          * ========================================
          * 层 7：Mouse（鼠标层）
          * ========================================
-         * 
-         * 通过 Base 层左 Ctrl（&lt 7 LCTRL）按住时临时激活。
-         * 包含鼠标移动、点击和滚轮。
          */
         layer_mouse {
             display-name = "Mouse";
@@ -369,25 +352,24 @@
                 // 第 4 行：左键 + 右键
                 &none           &none          &none            &none          &none          &mkp LCLK      &mkp RCLK      &none          &none          &none          &none
             >;
-            sensor-bindings = <&scroll_ud>;                      // 编码器：自定义滚动行为
+            sensor-bindings = <&scroll_ud>;
         };
 
         /*
          * ========================================
-         * 层 8：System（系统层）- 新增
+         * 层 8：System（系统层）- 已激活，功能增强
          * ========================================
-         * 
-         * 预留用于系统功能。
-         * 包含截图、锁屏等系统快捷键。
+         * 通过 Base 层 ↑ 按住激活
+         * 包含 Windows 快捷键
          */
         layer_system {
             display-name = "System";
             bindings = <
-                // 第 1 行：系统功能
-                &none           &kp PSCRN      &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 1 行：Windows 快捷键
+                &none           &kp PSCRN      &kp LGUI(LD)   &kp LGUI(LE)   &kp LGUI(LR)   &kp LGUI(LL)   &none          &none          &none          &none          &none          &none
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 3 行：Windows 快捷键
+                // 第 3 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 4 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
@@ -399,9 +381,6 @@
          * ========================================
          * 层 9：Bluetooth（蓝牙层）
          * ========================================
-         * 
-         * 通过 Base 层右拇指下键（&lt 9 C_MUTE）按住时临时激活。
-         * 包含蓝牙切换和输出切换。
          */
         layer_bluetooth {
             display-name = "Bluetooth";
@@ -415,7 +394,7 @@
                 // 第 4 行：输出切换
                 &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none
             >;
-            sensor-bindings = <&encoder_bt_switch>;    // 编码器：蓝牙设备切换
+            sensor-bindings = <&encoder_bt_switch>;
         };
     };
 
@@ -423,14 +402,9 @@
      * ========================================
      * 组合键 (Combos)
      * ========================================
-     * 
-     * 组合键允许同时按下多个按键来触发一个不同的行为。
-     * combos 节点与 keymap 节点平级，在按键映射之前被处理。
-     * 
-     * 官方文档：https://zmk.dev/docs/keymaps/combos
      */
     combos {
-        compatible = "zmk,combos";           // 标识此为 ZMK 组合键配置节点
+        compatible = "zmk,combos";
 
         // ===== 基础编辑组合键 =====
 
@@ -483,7 +457,7 @@
             layers = <0>;
         };
 
-        // ===== 新增系统组合键 =====
+        // ===== 系统组合键 =====
 
         combo_screenshot {
             timeout-ms = <50>;
@@ -491,8 +465,5 @@
             bindings = <&kp PSCRN>;
             layers = <0>;
         };
-
-        // 注意：以下组合键因 devicetree 不支持嵌套修饰键语法已移除
-        // 如需锁屏、任务管理器等功能，请使用 System 层或 ZMK Studio 配置
     };
 };

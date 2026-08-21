@@ -23,10 +23,10 @@
         wakeup-source;
         diode-direction = "col2row";
 
-        // 去抖 3ms，与 .conf 中 ZMK_KSCAN_DEBOUNCE_*_MS=3 保持一致
-        // 兼顾响应速度与稳定性，避免 1ms 过于激进导致双击/误触
-        debounce-press-ms = <3>;
-        debounce-release-ms = <3>;
+        // 去抖 2ms，与 .conf 中 ZMK_KSCAN_DEBOUNCE_*_MS=2 保持一致
+        // 机械轴适用，更快响应
+        debounce-press-ms = <2>;
+        debounce-release-ms = <2>;
         debounce-scan-period-ms = <1>;
 
         col-gpios
