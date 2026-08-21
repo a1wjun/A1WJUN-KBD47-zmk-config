@@ -523,25 +523,7 @@
             layers = <0>;
         };
 
-        combo_lock {
-            timeout-ms = <50>;
-            key-positions = <39 40>;         // . + / = Win+L (锁屏)
-            bindings = <&kp LG(L)>;
-            layers = <0>;
-        };
-
-        combo_task_manager {
-            timeout-ms = <50>;
-            key-positions = <0 12>;          // ESC + TAB = Ctrl+Shift+Esc (任务管理器)
-            bindings = <&kp LS(LC(DELETE))>;
-            layers = <0>;
-        };
-
-        combo_input_method {
-            timeout-ms = <50>;
-            key-positions = <36 37>;         // LALT + SPACE = Alt+Shift (切换输入法)
-            bindings = <&kp LS(LA)>;
-            layers = <0>;
-        };
+        // 注意：以下组合键因 devicetree 不支持嵌套修饰键语法已移除
+        // 如需锁屏、任务管理器等功能，请使用 System 层或 ZMK Studio 配置
     };
 };
