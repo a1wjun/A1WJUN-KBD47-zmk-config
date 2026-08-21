@@ -729,5 +729,28 @@
             bindings = <&kp PSCRN>;
             layers = <0>;
         };
+
+        // ===== 常用快捷组合键 =====
+
+        combo_save {
+            timeout-ms = <50>;  // Ctrl+S 保存
+            key-positions = <14 15>;
+            bindings = <&kp LC(S)>;
+            layers = <0>;
+        };
+
+        combo_print {
+            timeout-ms = <50>;  // Ctrl+P 打印
+            key-positions = <16 17>;
+            bindings = <&kp LC(P)>;
+            layers = <0>;
+        };
+
+        combo_find {
+            timeout-ms = <50>;  // Ctrl+F 查找
+            key-positions = <18 19>;
+            bindings = <&kp LC(F)>;
+            layers = <0>;
+        };
     };
 };
