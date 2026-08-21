@@ -367,7 +367,7 @@
             display-name = "System";
             bindings = <
                 // 第 1 行：系统功能键
-                &none           &kp PSCRN      &kp SLCK       &kp PAUSE      &kp INSERT     &kp DELETE     &none          &none          &none          &none          &none          &none
+                &none           &kp PSCRN      &kp SLCK       &kp PAUSE_BREAK &kp INSERT     &kp DELETE     &none          &none          &none          &none          &none          &none
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 3 行：空
