@@ -1,6 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <physical_layouts.dtsi>
-#include "A1WJUN-KBD47.dtsi"   // 引入纯物理布局
+#include "A1WJUN-KBD47.dtsi"   // 已包含 physical_layouts.dtsi，避免重复 include
 
 / {
     // ========== 矩阵变换 ==========

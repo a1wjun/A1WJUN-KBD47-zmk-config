@@ -830,21 +830,21 @@
 
         combo_lock {
             timeout-ms = <80>;
-            key-positions = <37 88>;  // 慢速组合：LCTRL + LGUI = Win+L（避免误触）
+            key-positions = <36 37>;  // LCTRL(36) + LGUI(37) = Win+L（避免误触）
             bindings = <&kp LG(L)>;
             layers = <0>;
         };
 
         combo_find {
             timeout-ms = <80>; 
-            key-positions = <38 39>;  // 慢速组合：LGUI + LALT = Win+F（避免误触）
+            key-positions = <37 38>;  // LGUI(37) + LALT(38) = Ctrl+F（避免误触）
             bindings = <&kp LC(F)>;
             layers = <0>;
         };
 
         combo_screenshot {
             timeout-ms = <80>;
-            key-positions = <39 40>;  // 慢速组合：LALT +  = PrtSc（避免误触）
+            key-positions = <38 39>;  // LALT(38) + VOL_DN(39) = PrtSc（避免误触）
             bindings = <&kp PSCRN>;
             layers = <0>;
         };
