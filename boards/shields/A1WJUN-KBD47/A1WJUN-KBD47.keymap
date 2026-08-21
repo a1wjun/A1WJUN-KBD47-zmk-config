@@ -198,6 +198,8 @@
          *   - 右 Alt 按住 → 层 4（Symbols）
          *   - DEL 按住 → 层 6（Navigation）
          *   - ↑ 按住 → 层 8（System）
+         * 
+         * 注意：display-name 最大 20 字符，只使用字母、数字、下划线
          */
         layer_base {
             display-name = "Base";
