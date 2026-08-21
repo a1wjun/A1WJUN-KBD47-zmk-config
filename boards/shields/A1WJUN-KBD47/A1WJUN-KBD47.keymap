@@ -60,6 +60,19 @@
         };
 
         /*
+         * toggle_layer (Toggle Layer 行为)
+         * 单击切换层开关，双击临时激活层
+         */
+        tog: toggle_layer {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&tog>, <&kp>;
+            display-name = "Toggle Layer";
+        };
+
+        /*
          * tap_dance_esc (ESC Tap Dance)
          * 单击 = ESC，双击 = ` (反引号)
          */
@@ -404,7 +417,8 @@
                 &none           &kp INSERT     &kp DELETE     &kp PAUSE_BREAK &kp PSCRN     &kp SLCK       &kp HOME       &kp END        &kp PAGE_UP    &kp PAGE_DOWN  &none          &none
                 // 第 2 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 3 行：空
+                // 第 3 行：Toggle 层示例（单击切换，双击临时激活）
+                &none           &none          &none          &none          &none          &none          &tog 10        &kp NONE       &none          &none          &none          &none
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 4 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
