@@ -67,7 +67,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance ESC";
         };
@@ -103,7 +103,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Encoder Click ESC";
         };
@@ -135,7 +135,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&bt BT_PRV>, <&bt BT_NXT>;
-            tap-ms = <20>;
+            tap-ms = <1>;
         };
     };
 
@@ -149,7 +149,7 @@
         email_macro: email_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp U>, <&kp S>, <&kp E>, <&kp R>, <&kp AT>, <&kp G>, <&kp M>, <&kp A>, <&kp I>, <&kp L>, <&kp DOT>, <&kp C>, <&kp O>, <&kp M>;
+            bindings = <&kp A>, <&kp N1>, <&kp W>, <&kp I>, <&kp L>, <&kp L>, <&kp I>, <&kp A>, <&kp M>, <&kp DOT>, <&kp W>, <&kp A>, <&kp N>, <&kp G>, <&kp AT>, <&kp G>, <&kp M>, <&kp A>, <&kp I>, <&kp L>, <&kp DOT>, <&kp C>, <&kp O>, <&kp M>;
             wait-ms = <10>;
             tap-ms = <10>;
         };
@@ -200,7 +200,7 @@
          * ========================================
          * 
          * 底层快捷键：
-         *   - ESC 单击=ESC，双击=` (Tap Dance)
+         *   - ESC 单击=ESC，双击=MUTE (Tap Dance)
          *   - TAB 单击=TAB，双击=CAPS (Tap Dance)
          *   - 左 GUI 按住 → 层 3（Button）
          *   - 左 Ctrl 按住 → 层 7（Mouse）
@@ -218,7 +218,7 @@
             display-name = "Base 0";
             bindings = <
                 // 第 1 行（12 键）- ESC 和 TAB 使用 Tap Dance
-                &td_esc ESC GRAVE  &kp Q         &kp W         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P          &kp BACKSPACE
+                &td_esc ESC C_MUTE &td_q Q N1    &td_w W N2         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P          &kp BACKSPACE
                 // 第 2 行（12 键）- TAB 使用 Tap Dance
                 &td_tab TAB CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp H         &kp J         &kp K         &kp L         &kp SLASH      &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
