@@ -215,7 +215,7 @@
          * 注意：display-name 最大 20 字符，只使用字母、数字、下划线
          */
         layer_base {
-            display-name = "Base";
+            display-name = "Base 0";
             bindings = <
                 // 第 1 行（12 键）- ESC 和 TAB 使用 Tap Dance
                 &td_esc ESC GRAVE  &kp Q         &kp W         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P          &kp BACKSPACE
@@ -235,7 +235,7 @@
          * ========================================
          */
         layer_number {
-            display-name = "Number";
+            display-name = "Number 1";
             bindings = <
                 // 第 1 行：数字行 + 滚轮上滚
                 &trans          &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &msc SCRL_UP
@@ -255,7 +255,7 @@
          * ========================================
          */
         layer_function {
-            display-name = "Function";
+            display-name = "Function 2";
             bindings = <
                 // 第 1 行：F1-F12
                 &kp F11         &kp F1         &kp F2         &kp F3         &kp F4         &kp F5         &kp F6         &kp F7         &kp F8         &kp F9         &kp F10        &kp F12
@@ -275,7 +275,7 @@
          * ========================================
          */
         layer_button {
-            display-name = "Button";
+            display-name = "Button 3";
             bindings = <
                 // 第 1 行：软关机 + 蓝牙断开
                 &soft_off       &none          &none          &none          &none          &none          &none          &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &none          &none
@@ -296,7 +296,7 @@
          * 通过 Base 层右 Alt 按住激活
          */
         layer_symbols {
-            display-name = "Symbols";
+            display-name = "Symbols 4";
             bindings = <
                 // 第 1 行：特殊符号
                 &none           &kp N1         &kp N2         &kp N3         &kp N4         &kp N5         &kp N6         &kp N7         &kp N8         &kp N9         &kp N0         &none
@@ -316,7 +316,7 @@
          * ========================================
          */
         layer_media {
-            display-name = "Media";
+            display-name = "Media 5";
             bindings = <
                 // 第 1 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
@@ -337,7 +337,7 @@
          * 通过 Base 层 DEL 按住激活
          */
         layer_navigation {
-            display-name = "Navigation";
+            display-name = "Navigation 6";
             bindings = <
                 // 第 1 行：空
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
@@ -357,7 +357,7 @@
          * ========================================
          */
         layer_mouse {
-            display-name = "Mouse";
+            display-name = "Mouse 7";
             bindings = <
                 // 第 1 行：鼠标上移 + 滚轮上滚
                 &none           &none          &mmv MOVE_UP     &none          &none          &none          &none          &msc SCRL_UP   &none          &none          &none          &none
@@ -380,7 +380,7 @@
          * Windows 快捷键可通过 ZMK Studio 在线配置
          */
         layer_system {
-            display-name = "System";
+            display-name = "System 8";
             bindings = <
                 // 第 1 行：系统功能键
                 &none           &kp INSERT     &kp DELETE     &kp PAUSE_BREAK &kp PSCRN     &kp SLCK       &kp HOME       &kp END        &kp PAGE_UP    &kp PAGE_DOWN  &none          &none
@@ -400,7 +400,7 @@
          * ========================================
          */
         layer_bluetooth {
-            display-name = "Bluetooth";
+            display-name = "Bluetooth 9";
             bindings = <
                 // 第 1 行：蓝牙设备选择
                 &none           &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &none          &none          &none          &none          &none          &none          &none
@@ -420,7 +420,7 @@
          * ========================================
          */
         layer_reserved_10 {
-            display-name = "Layer10";
+            display-name = "Layer 10";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -431,7 +431,7 @@
         };
 
         layer_reserved_11 {
-            display-name = "Layer11";
+            display-name = "Layer 11";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -442,7 +442,7 @@
         };
 
         layer_reserved_12 {
-            display-name = "Layer12";
+            display-name = "Layer 12";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -453,7 +453,7 @@
         };
 
         layer_reserved_13 {
-            display-name = "Layer13";
+            display-name = "Layer 13";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -464,7 +464,7 @@
         };
 
         layer_reserved_14 {
-            display-name = "Layer14";
+            display-name = "Layer 14";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -475,7 +475,7 @@
         };
 
         layer_reserved_15 {
-            display-name = "Layer15";
+            display-name = "Layer 15";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -486,7 +486,7 @@
         };
 
         layer_reserved_16 {
-            display-name = "Layer16";
+            display-name = "Layer 16";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -497,7 +497,7 @@
         };
 
         layer_reserved_17 {
-            display-name = "Layer17";
+            display-name = "Layer 17";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -508,7 +508,7 @@
         };
 
         layer_reserved_18 {
-            display-name = "Layer18";
+            display-name = "Layer 18";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -519,7 +519,7 @@
         };
 
         layer_reserved_19 {
-            display-name = "Layer19";
+            display-name = "Layer 19";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -530,7 +530,7 @@
         };
 
         layer_reserved_20 {
-            display-name = "Layer20";
+            display-name = "Layer 20";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -541,7 +541,7 @@
         };
 
         layer_reserved_21 {
-            display-name = "Layer21";
+            display-name = "Layer 21";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -552,7 +552,7 @@
         };
 
         layer_reserved_22 {
-            display-name = "Layer22";
+            display-name = "Layer 22";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -563,7 +563,7 @@
         };
 
         layer_reserved_23 {
-            display-name = "Layer23";
+            display-name = "Layer 23";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -574,7 +574,7 @@
         };
 
         layer_reserved_24 {
-            display-name = "Layer24";
+            display-name = "Layer 24";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -585,7 +585,7 @@
         };
 
         layer_reserved_25 {
-            display-name = "Layer25";
+            display-name = "Layer 25";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -596,7 +596,7 @@
         };
 
         layer_reserved_26 {
-            display-name = "Layer26";
+            display-name = "Layer 26";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -607,7 +607,7 @@
         };
 
         layer_reserved_27 {
-            display-name = "Layer27";
+            display-name = "Layer 27";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -618,7 +618,7 @@
         };
 
         layer_reserved_28 {
-            display-name = "Layer28";
+            display-name = "Layer 28";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -629,7 +629,7 @@
         };
 
         layer_reserved_29 {
-            display-name = "Layer29";
+            display-name = "Layer 29";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -640,7 +640,7 @@
         };
 
         layer_reserved_30 {
-            display-name = "Layer30";
+            display-name = "Layer 30";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -651,7 +651,7 @@
         };
 
         layer_reserved_31 {
-            display-name = "Layer31";
+            display-name = "Layer 31";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
