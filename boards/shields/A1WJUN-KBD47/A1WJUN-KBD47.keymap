@@ -234,7 +234,7 @@
             bindings = <
                 &td_esc C_MUTE ESC &kp Q       &kp W       &kp E       &kp R       &kp T       &kp Y       &kp U       &kp I       &kp O       &kp P       &kp BACKSPACE
                 // 第 2 行（12 键）- CAPS 使用 Tap Dance
-                &td_tab TAB CAPS   &kp A        &kp S        &kp D        &kp F        &kp G        &kp H        &kp J        &kp K        &kp L        &kp SLASH    &kp ENTER
+                &td_caps TAB CAPS   &kp A        &kp S        &kp D        &kp F        &kp G        &kp H        &kp J        &kp K        &kp L        &kp SLASH    &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
                 &kp LSHFT          &kp Z        &kp X        &kp C        &kp V        &kp B        &kp N        &kp M        &kp COMMA    &kp DOT      &lt 6 UP     &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
