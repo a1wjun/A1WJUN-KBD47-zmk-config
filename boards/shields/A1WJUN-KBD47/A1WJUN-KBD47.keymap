@@ -20,12 +20,13 @@
 #define Number      1
 #define Function    2
 #define Bluetooth   3
-#define Symbols     4
+#define Macro       4
 #define Media       5
 #define Navigation  6
 #define Mouse       7
 #define System      8
-#define Button      9
+#define Cs          9
+#define Fortnite    10
 
 / {
     /*
@@ -308,8 +309,8 @@
          * ========================================
          * 通过 Base 层右 Alt 按住激活
          */
-        layer_symbols {
-            display-name = "Symbols 4";
+        layer_macro {
+            display-name = "Macro 4";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -389,11 +390,11 @@
 
         /*
          * ========================================
-         * 层 9：Button（蓝牙与系统控制层）
+         * 层 9：Cs（蓝牙与系统控制层）
          * ========================================
          */
-        layer_button {
-            display-name = "Button 9";
+        layer_cs {
+            display-name = "Cs 9";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
@@ -408,8 +409,8 @@
          * 预留层 10-31（空层，供未来扩展或 ZMK Studio 动态配置）
          * ========================================
          */
-        layer_reserved_10 {
-            display-name = "Layer 10";
+        layer_fortnite {
+            display-name = "Fortnite 10";
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &none &none &none &none &none &none &none &none &none &none &none &none
