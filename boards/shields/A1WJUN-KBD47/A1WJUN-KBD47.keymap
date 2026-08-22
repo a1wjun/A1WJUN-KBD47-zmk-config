@@ -68,7 +68,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance ESC";
         };
@@ -81,7 +81,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance Q";
         };
@@ -94,7 +94,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance W";
         };
@@ -107,7 +107,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance E";
         };
@@ -120,7 +120,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance R";
         };
@@ -132,7 +132,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance T";
         };
@@ -145,7 +145,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance Y";
         };
@@ -158,7 +158,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance U";
         };
@@ -171,7 +171,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance I";
         };
@@ -183,7 +183,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance O";
         };
@@ -196,7 +196,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance P";
         };
@@ -209,7 +209,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance TAB";
         };
@@ -232,7 +232,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <150>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Encoder Click ESC";
         };
