@@ -68,9 +68,22 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance ESC";
+        };
+
+        /*
+         * tap_dance_tab (TAB Tap Dance)
+         * 单击 = TAB，双击 = CAPSLOCK
+         */
+        td_tab: tap_dance_tab {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <80>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap Dance TAB";
         };
 
          /*
@@ -81,7 +94,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance Q";
         };
@@ -94,7 +107,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance W";
         };
@@ -107,7 +120,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance E";
         };
@@ -120,7 +133,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance R";
         };
@@ -132,7 +145,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance T";
         };
@@ -145,7 +158,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance Y";
         };
@@ -158,7 +171,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance U";
         };
@@ -171,7 +184,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance I";
         };
@@ -183,7 +196,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance O";
         };
@@ -196,22 +209,9 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance P";
-        };
-
-        /*
-         * tap_dance_tab (TAB Tap Dance)
-         * 单击 = TAB，双击 = CAPSLOCK
-         */
-        td_tab: tap_dance_tab {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <60>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance TAB";
         };
 
         /*
@@ -232,7 +232,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <60>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Encoder Click ESC";
         };
@@ -389,8 +389,8 @@
                 &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 3 行：清除所有配对、系统复位、进入刷机模式、Studio 解锁
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
-                // 第 4 行：空
-                &none           &none          &none          &none          &encoder_click_esc ESC C_MUTE  &none          &bt BT_CLR_ALL &bt BT_CLR     &sys_reset     &bootloader    &studio_unlock         
+                // 第 4 行：邮箱宏 + 编码器点击 + 蓝牙清除/复位
+                &none           &none          &none          &email_macro    &encoder_click_esc ESC C_MUTE  &none          &bt BT_CLR_ALL &bt BT_CLR     &sys_reset     &bootloader    &studio_unlock         
             >;
             sensor-bindings = <&encoder_bt_switch>;
         };
@@ -758,23 +758,24 @@
         compatible = "zmk,combos";
 
         // ===== 基础编辑组合键 =====
+        // timeout 三档规则：50=纯字母快速组合 / 80=含修饰键组合 / 100=涉及 Tap Dance 键
 
         combo_esc {
-            timeout-ms = <30>;
+            timeout-ms = <100>;
             key-positions = <1 2>;  // td_q(1) + td_w(2) = ESC；需在 100ms 内完成，否则触发 hold-tap 的数字 1/2
             bindings = <&kp ESC>;
             layers = <0>;
         };
 
         combo_print {
-            timeout-ms = <80>;
+            timeout-ms = <100>;
             key-positions = <9 10>;  // td_o(9) + td_p(10) = Ctrl+P；需在 100ms 内完成，否则触发数字 9/0
             bindings = <&kp LC(P)>;
             layers = <0>;
         };
 
         combo_select_all {
-            timeout-ms = <180>;  // 优化：50→180，配合 td_tab tapping-term-ms=150ms 让 tap 窗口内能完成
+            timeout-ms = <100>;  // 100ms 档：涉及 Tap Dance 键（td_tab），需放宽以避免误出按键
             key-positions = <12 13>;  // td_tab(12) + A(13) = Ctrl+A；td_tab 是 Tap Dance，timeout 需放宽
             bindings = <&kp LC(A)>;
             layers = <0>;
@@ -784,6 +785,20 @@
             timeout-ms = <50>;  
             key-positions = <13 14>;  // A(13) + S(14) = Ctrl+S
             bindings = <&kp LC(S)>;
+            layers = <0>;
+        };
+
+        combo_find {
+            timeout-ms = <80>; 
+            key-positions = <15 16>;  // LGUI(15) + LALT(16) = Ctrl+F（避免误触）
+            bindings = <&kp LC(F)>;
+            layers = <0>;
+        };
+
+        combo_goto {
+            timeout-ms = <80>; 
+            key-positions = <16 17>;  // LGUI(16) + LALT(17) = Ctrl+G GoTo (Word/VSCode)
+            bindings = <&kp LC(G)>;
             layers = <0>;
         };
 
@@ -831,7 +846,7 @@
             layers = <0>;
         };
 
-        combo_find {
+        combo_find_alt {
             timeout-ms = <80>; 
             key-positions = <37 38>;  // LGUI(37) + LALT(38) = Ctrl+F（避免误触）
             bindings = <&kp LC(F)>;
