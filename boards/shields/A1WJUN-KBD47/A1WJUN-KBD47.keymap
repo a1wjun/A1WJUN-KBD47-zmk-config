@@ -69,7 +69,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <100>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance ESC";
         };
@@ -82,7 +82,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <100>;
+            tapping-term-ms = <80>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance TAB";
         };
@@ -520,13 +520,6 @@
             timeout-ms = <80>;
             key-positions = <36 37>;  // lt 3 LCTRL(36) + LGUI(37) = Win+L（避免误触）
             bindings = <&kp LG(L)>;
-            layers = <0>;
-        };
-
-        combo_find_alt {
-            timeout-ms = <80>;
-            key-positions = <37 38>;  // LGUI(37) + LALT(38) = Ctrl+F（避免误触）
-            bindings = <&kp LC(F)>;
             layers = <0>;
         };
 
