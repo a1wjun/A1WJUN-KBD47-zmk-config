@@ -75,16 +75,16 @@
         };
 
         /*
-         * tap_dance_tab (TAB Tap Dance)
-         * 轻点 = TAB，按住 = CAPS（参数1=按住，参数2=轻点）
+         * tap_dance_caps (CAPS Tap Dance)
+         * 轻点 = CAPS，按住 = TAB（参数1=按住，参数2=轻点）
          */
-        td_tab: tap_dance_tab {
+        td_caps: tap_dance_caps {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance TAB";
+            display-name = "Tap Dance CAPS";
         };
 
         /*
@@ -233,8 +233,8 @@
             display-name = "Base 0";
             bindings = <
                 &td_esc C_MUTE ESC &kp Q       &kp W       &kp E       &kp R       &kp T       &kp Y       &kp U       &kp I       &kp O       &kp P       &kp BACKSPACE
-                // 第 2 行（12 键）- TAB 使用 Tap Dance
-                &td_tab CAPS TAB   &kp A        &kp S        &kp D        &kp F        &kp G        &kp H        &kp J        &kp K        &kp L        &kp SLASH    &kp ENTER
+                // 第 2 行（12 键）- CAPS 使用 Tap Dance
+                &td_tab TAB CAPS   &kp A        &kp S        &kp D        &kp F        &kp G        &kp H        &kp J        &kp K        &kp L        &kp SLASH    &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
                 &kp LSHFT          &kp Z        &kp X        &kp C        &kp V        &kp B        &kp N        &kp M        &kp COMMA    &kp DOT      &lt 6 UP     &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
