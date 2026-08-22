@@ -82,7 +82,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <50>;
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance TAB";
         };
@@ -94,7 +94,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-            tap-ms = <50>;
+            tap-ms = <20>;
         };
 
         /*
@@ -117,7 +117,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_PREV>, <&kp C_NEXT>;
-            tap-ms = <50>;
+            tap-ms = <20>;
         };
 
         /*
@@ -127,7 +127,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&bt BT_PRV>, <&bt BT_NXT>;
-            tap-ms = <25>;                    // 优化：1→25，避免一圈触发几十次在 5 个 profile 间飞速切换
+            tap-ms = <10>;                    // 优化：1→25，避免一圈触发几十次在 5 个 profile 间飞速切换
         };
     };
 
