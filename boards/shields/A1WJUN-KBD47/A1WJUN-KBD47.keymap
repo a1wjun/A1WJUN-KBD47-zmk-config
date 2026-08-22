@@ -144,6 +144,42 @@
             wait-ms = <10>;
             tap-ms = <10>;
         };
+
+        // 一键输入账号 id0
+        id0_macro: id0_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp N1>, <&kp W>, <&kp J>, <&kp U>, <&kp N>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
+
+        // 一键输入密码0前缀（剩余部分手动输入，防止完整密码入固件）
+        password0_macro: password0_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp S>, <&kp D>, <&kp N1>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
+
+        // 一键输入密码1前缀（剩余部分手动输入，防止完整密码入固件）
+        password1_macro: password1_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp N1>, <&kp W>, <&kp I>, <&kp L>, <&kp L>, <&kp I>, <&kp A>, <&kp M>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
+
+        // 一键输入密码2前缀（剩余部分手动输入，防止完整密码入固件）
+        password2_macro: password2_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp A>, <&kp S>, <&kp D>, <&kp N8>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+        };
     };
 };
 
@@ -189,19 +225,19 @@
          * ========================================
          * 层 0：Base（基础层）- 最终优化版
          * ========================================
-         * 
+         *
          * 注意：display-name 最大 20 字符，只使用字母、数字、下划线
          */
         layer_base {
             display-name = "Base 0";
             bindings = <
-                &td_esc ESC C_MUTE &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6    &kp N7    &kp N8    &kp N9   &kp N0      &kp BACKSPACE
+                &td_esc ESC C_MUTE &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &kp BACKSPACE
                 // 第 2 行（12 键）- TAB 使用 Tap Dance
-                &td_tab TAB CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp H         &kp J         &kp K         &kp L         &kp SLASH      &kp ENTER
+                &td_tab TAB CAPS   &kp A       &kp S       &kp D       &kp F       &kp G       &kp H       &kp J       &kp K       &kp L       &kp SLASH   &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
-                &kp LSHFT        &kp Z         &kp X         &kp C         &kp V         &kp B         &kp N         &kp M         &kp COMMA     &kp DOT       &lt 6 UP       &lt 8 DEL
+                &kp LSHFT          &kp Z       &kp X       &kp C       &kp V       &kp B       &kp N       &kp M       &kp COMMA   &kp DOT     &lt 6 UP    &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
-                &lt 3 LCTRL      &kp LGUI    &kp LALT    &kp C_VOL_DN  &kp C_PP    &lt 1 SPACE   &lt 2 SPACE   &kp C_VOL_UP    &kp LEFT      &kp DOWN      &kp RIGHT
+                &lt 3 LCTRL        &kp LGUI    &kp LALT    &kp C_VOL_DN &kp C_PP   &lt 1 SPACE &lt 2 SPACE &kp C_VOL_UP &kp LEFT   &kp DOWN    &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -256,12 +292,12 @@
             bindings = <
                 // 第 1 行：软关机 + 蓝牙断开
                 &soft_off       &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4   &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4  &none
-                // 第 2 行：蓝牙清除 + 选择设备
-                &none           &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none          &none          &none          &none          &none          &none
+                // 第 2 行：账号/密码宏 + 输出切换
+                &none           &id0_macro     &password0_macro &password1_macro &password2_macro &email_macro &out OUT_USB   &out OUT_BLE   &out OUT_TOG   &none          &none          &none
                 // 第 3 行：清除所有配对、系统复位、进入刷机模式、Studio 解锁
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 4 行：邮箱宏 + 编码器点击 + 蓝牙清除/复位
-                &none           &none          &none          &email_macro    &encoder_click_esc ESC C_MUTE  &none          &bt BT_CLR_ALL &bt BT_CLR     &sys_reset     &bootloader    &studio_unlock         
+                &none           &none          &none          &none        &encoder_click_esc ESC C_MUTE &none &bt BT_CLR_ALL &bt BT_CLR    &sys_reset     &bootloader    &studio_unlock
             >;
             sensor-bindings = <&encoder_bt_switch>;
         };
@@ -422,21 +458,21 @@
         };
 
         combo_save {
-            timeout-ms = <50>;  
+            timeout-ms = <50>;
             key-positions = <13 14>;  // A(13) + S(14) = Ctrl+S
             bindings = <&kp LC(S)>;
             layers = <0>;
         };
 
         combo_find {
-            timeout-ms = <80>; 
+            timeout-ms = <80>;
             key-positions = <15 16>;  // LGUI(15) + LALT(16) = Ctrl+F（避免误触）
             bindings = <&kp LC(F)>;
             layers = <0>;
         };
 
         combo_goto {
-            timeout-ms = <80>; 
+            timeout-ms = <80>;
             key-positions = <16 17>;  // LGUI(16) + LALT(17) = Ctrl+G GoTo (Word/VSCode)
             bindings = <&kp LC(G)>;
             layers = <0>;
@@ -487,7 +523,7 @@
         };
 
         combo_find_alt {
-            timeout-ms = <80>; 
+            timeout-ms = <80>;
             key-positions = <37 38>;  // LGUI(37) + LALT(38) = Ctrl+F（避免误触）
             bindings = <&kp LC(F)>;
             layers = <0>;
