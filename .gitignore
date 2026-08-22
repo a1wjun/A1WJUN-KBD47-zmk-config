@@ -1,0 +1,15 @@
+# 备份文件
+*.bak
+*.bak2
+*.orig
+*.old
+
+# 编辑器 / 系统临时文件
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store
+
+# 本地构建产物
+build/

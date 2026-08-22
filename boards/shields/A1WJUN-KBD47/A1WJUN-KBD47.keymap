@@ -62,7 +62,7 @@
 
         /*
          * tap_dance_esc (ESC Tap Dance)
-         * 单击 = ESC，双击 = MUTE
+         * 轻点 = ESC，按住 = C_MUTE（参数1=按住，参数2=轻点）
          */
         td_esc: tap_dance_esc {
             compatible = "zmk,behavior-hold-tap";
@@ -75,7 +75,7 @@
 
         /*
          * tap_dance_tab (TAB Tap Dance)
-         * 单击 = TAB，双击 = CAPSLOCK
+         * 轻点 = TAB，按住 = CAPS（参数1=按住，参数2=轻点）
          */
         td_tab: tap_dance_tab {
             compatible = "zmk,behavior-hold-tap";
@@ -98,7 +98,7 @@
 
         /*
          * encoder_click_esc (编码器点击 - ESC功能)
-         * 单击 = ESC，双击 = ` (与 col0 row0 相同)
+         * 轻点 = ESC，按住 = C_MUTE（参数1=按住，参数2=轻点）
          */
         encoder_click_esc: encoder_click_esc {
             compatible = "zmk,behavior-hold-tap";
@@ -231,13 +231,13 @@
         layer_base {
             display-name = "Base 0";
             bindings = <
-                &td_esc ESC C_MUTE &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &kp BACKSPACE
+                &td_esc C_MUTE ESC &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &kp BACKSPACE
                 // 第 2 行（12 键）- TAB 使用 Tap Dance
-                &td_tab TAB CAPS   &kp A       &kp S       &kp D       &kp F       &kp G       &kp H       &kp J       &kp K       &kp L       &kp SLASH   &kp ENTER
+                &td_tab CAPS TAB   &kp A        &kp S        &kp D        &kp F        &kp G        &kp H        &kp J        &kp K        &kp L        &kp SLASH    &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
-                &kp LSHFT          &kp Z       &kp X       &kp C       &kp V       &kp B       &kp N       &kp M       &kp COMMA   &kp DOT     &lt 6 UP    &lt 8 DEL
+                &kp LSHFT          &kp Z        &kp X        &kp C        &kp V        &kp B        &kp N        &kp M        &kp COMMA    &kp DOT      &lt 6 UP     &lt 8 DEL
                 // 第 4 行（11 键）- 右 Alt 激活 Symbols 层
-                &lt 3 LCTRL        &kp LGUI    &kp LALT    &kp C_VOL_DN &kp C_PP   &lt 1 SPACE &lt 2 SPACE &kp C_VOL_UP &kp LEFT   &kp DOWN    &kp RIGHT
+                &lt 3 LCTRL        &kp LGUI     &kp LALT     &kp C_VOL_DN  &kp C_PP     &lt 1 SPACE  &lt 2 SPACE  &kp C_VOL_UP  &kp LEFT     &kp DOWN     &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
@@ -297,7 +297,7 @@
                 // 第 3 行：清除所有配对、系统复位、进入刷机模式、Studio 解锁
                 &none           &none          &none          &none          &none          &none          &none          &none          &none          &none          &none          &none
                 // 第 4 行：邮箱宏 + 编码器点击 + 蓝牙清除/复位
-                &none           &none          &none          &none        &encoder_click_esc ESC C_MUTE &none &bt BT_CLR_ALL &bt BT_CLR    &sys_reset     &bootloader    &studio_unlock
+                &none           &none          &none          &none        &encoder_click_esc C_MUTE ESC &none &bt BT_CLR_ALL &bt BT_CLR    &sys_reset     &bootloader    &studio_unlock
             >;
             sensor-bindings = <&encoder_bt_switch>;
         };
@@ -437,15 +437,15 @@
         // timeout 三档规则：50=纯字母快速组合 / 80=含修饰键组合 / 100=涉及 Tap Dance 键
 
         combo_esc {
-            timeout-ms = <100>;
-            key-positions = <1 2>;  // td_q(1) + td_w(2) = ESC；需在 100ms 内完成，否则触发 hold-tap 的数字 1/2
+            timeout-ms = <50>;
+            key-positions = <1 2>;  // N1(1) + N2(2) = ESC；50ms 档：td_* 字母键已移除，无 hold-tap 冲突
             bindings = <&kp ESC>;
             layers = <0>;
         };
 
         combo_print {
-            timeout-ms = <100>;
-            key-positions = <9 10>;  // td_o(9) + td_p(10) = Ctrl+P；需在 100ms 内完成，否则触发数字 9/0
+            timeout-ms = <50>;
+            key-positions = <9 10>;  // N9(9) + N0(10) = Ctrl+P；50ms 档：td_* 字母键已移除，无 hold-tap 冲突
             bindings = <&kp LC(P)>;
             layers = <0>;
         };
