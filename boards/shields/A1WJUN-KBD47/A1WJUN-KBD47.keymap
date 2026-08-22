@@ -232,7 +232,7 @@
         layer_base {
             display-name = "Base 0";
             bindings = <
-                &td_esc C_MUTE ESC &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &kp BACKSPACE
+                &td_esc C_MUTE ESC &kp Q       &kp W       &kp E       &kp R       &kp T       &kp Y       &kp U       &kp I       &kp O       &kp P       &kp BACKSPACE
                 // 第 2 行（12 键）- TAB 使用 Tap Dance
                 &td_tab CAPS TAB   &kp A        &kp S        &kp D        &kp F        &kp G        &kp H        &kp J        &kp K        &kp L        &kp SLASH    &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
@@ -439,14 +439,14 @@
 
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <1 2>;  // N1(1) + N2(2) = ESC；50ms 档：td_* 字母键已移除，无 hold-tap 冲突
+            key-positions = <1 2>;  // Q(1) + W(2) = ESC；50ms 档：纯快速组合
             bindings = <&kp ESC>;
             layers = <0>;
         };
 
         combo_print {
             timeout-ms = <50>;
-            key-positions = <9 10>;  // N9(9) + N0(10) = Ctrl+P；50ms 档：td_* 字母键已移除，无 hold-tap 冲突
+            key-positions = <9 10>;  // O(9) + P(10) = Ctrl+P；50ms 档：纯快速组合
             bindings = <&kp LC(P)>;
             layers = <0>;
         };
