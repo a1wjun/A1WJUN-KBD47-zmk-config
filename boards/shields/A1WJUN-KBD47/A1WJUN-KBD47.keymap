@@ -81,137 +81,9 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <80>;
+            tapping-term-ms = <100>;
             bindings = <&kp>, <&kp>;
             display-name = "Tap Dance TAB";
-        };
-
-         /*
-         * tap_dance_q (Q Tap Dance)
-         * 单击 = Q，双击 = 1
-         */
-        td_q: tap_dance_q {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance Q";
-        };
-
-         /*
-         * tap_dance_w (W Tap Dance)
-         * 单击 = W，双击 = 2
-         */
-        td_w: tap_dance_w {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance W";
-        };
-
-         /*
-         * tap_dance_e (E Tap Dance)
-         * 单击 = E，双击 = 3
-         */
-        td_e: tap_dance_e {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance E";
-        };
-
-         /*
-         * tap_dance_r (R Tap Dance)
-         * 单击 = R，双击 = 4
-         */
-        td_r: tap_dance_r {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance R";
-        };
-         /*
-         * tap_dance_t (T Tap Dance)
-         * 单击 = T，双击 = 5
-         */
-        td_t: tap_dance_t {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance T";
-        };
-
-         /*
-         * tap_dance_y (Y Tap Dance)
-         * 单击 = Y，双击 = 6
-         */
-        td_y: tap_dance_y {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance Y";
-        };
-
-         /*
-         * tap_dance_u (U Tap Dance)
-         * 单击 = U，双击 = 7
-         */
-        td_u: tap_dance_u {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance U";
-        };
-
-         /*
-         * tap_dance_i (I Tap Dance)
-         * 单击 = I，双击 = 8
-         */
-        td_i: tap_dance_i {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance I";
-        };
-         /*
-         * tap_dance_o (O Tap Dance)
-         * 单击 = O，双击 = 9
-         */
-        td_o: tap_dance_o {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance O";
-        };
-
-         /*
-         * tap_dance_p (P Tap Dance)
-         * 单击 = P，双击 = 0
-         */
-        td_p: tap_dance_p {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <80>;
-            bindings = <&kp>, <&kp>;
-            display-name = "Tap Dance P";
         };
 
         /*
@@ -323,8 +195,7 @@
         layer_base {
             display-name = "Base 0";
             bindings = <
-                // 第 1 行（12 键）- ESC 和 TAB 使用 Tap Dance
-                &td_esc ESC C_MUTE &td_q Q N1    &td_w W N2    &td_e E N3    &td_r R N4    &td_t T N5    &td_y Y N6    &td_u U N7    &td_i I N8    &td_o O N9   &td_p P N0      &kp BACKSPACE
+                &td_esc ESC C_MUTE &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6    &kp N7    &kp N8    &kp N9   &kp N0      &kp BACKSPACE
                 // 第 2 行（12 键）- TAB 使用 Tap Dance
                 &td_tab TAB CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp H         &kp J         &kp K         &kp L         &kp SLASH      &kp ENTER
                 // 第 3 行（12 键）- DEL 激活 Navigation 层，↑ 激活 System 层
